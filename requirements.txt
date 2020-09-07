@@ -1,0 +1,7 @@
+Django==3.0.7
+django-appconf==1.0.4
+django-compressor==2.4
+django-sass==1.0.0
+django-sass-processor==0.8
+django-scss==0.6.1
+django-smuggler==1.0.1

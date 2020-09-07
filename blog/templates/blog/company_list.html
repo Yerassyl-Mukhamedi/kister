@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="dogovor_list">
+        <h1>Наши Компаний</h1>
+        <div class="row">
+            {% for company in companys %}
+                <a href="{% url 'entity_list' pk=company.id %}">
+                    <div class="col-md-3 folder">
+                        <img src="/media/images/folder.png">
+                        <div class="name">{{ company.name }}</div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

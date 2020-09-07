@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="entity_list">
+        {% if company %}
+            <h1>Контрагенты {{ company }}</h1>
+        {% endif %}
+        <div id="check_list">
+            {% for dogovor in dogovors %}
+                <a href="{% url 'dogovor_list' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id %}" class="{{dogovor.side_two.name}}" id="{{dogovor.side_two.name}}">
+                    <div class="col-md-3 folder">
+                        <img src="/media/images/folder.png">
+                        <div class="name">{{ dogovor.side_two.name }}</div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

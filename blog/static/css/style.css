@@ -1,0 +1,31 @@
+.dogovor_list .folder img {
+  width: 150px;
+}
+
+.dogovor_list .folder .name {
+  margin-top: 30px;
+}
+
+.dogovor_list .folder:hover {
+  cursor: pointer;
+}
+
+.entity_list .folder img {
+  width: 150px;
+}
+
+.entity_list .folder .name {
+  margin-top: 30px;
+}
+
+.entity_list .folder:hover {
+  cursor: pointer;
+}
+
+.entity_list .visible {
+  display: block;
+}
+
+.entity_list .hidden {
+  display: none;
+}

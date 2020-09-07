@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="dogovor_list">
+        {% if company and side_two %}
+            <h1>Договора {{ company }} с {{side_two.name}}</h1>
+        {% endif %}
+        {% for dogovor in dogovors %}
+            <div class="dogovor">
+                Создан: {{ dogovor.created_at }}
+                Начало Договора: {{ dogovor.date_start }}
+                Конец Договора: {{ dogovor.date_end }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
