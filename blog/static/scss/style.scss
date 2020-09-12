@@ -13,22 +13,16 @@
 }
 
 .entity_list{
-    .folder{
-        img{
-            width: 150px;
-        }
-        .name{
-            margin-top: 30px;
-        }
+    .name{
+        margin-top: 10px;
+        font-size: 18px;
     }
-    .folder:hover{
-        cursor: pointer;
+    h1{
+        margin-bottom: 20px;
     }
+}
 
-    .visible{
-        display: block;
-    }
-    .hidden{
-        display: none;
-    }
+
+.super_only{
+    border: 1px solid red;
 }

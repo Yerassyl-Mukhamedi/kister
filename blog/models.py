@@ -26,12 +26,6 @@ class Entity(models.Model):
     etype = models.CharField('Тип организаций', max_length=1, choices=entity_type)
     ebin2 = models.CharField('Иностранный Номер', max_length=200, blank=True)
 
-    def clean(self):
-        if self.ebin is not None and self.ebin2 is not None:
-            raise ValidationError('Введите только один уникальный номер (БИН)')
-        elif self.ebin is None or self.ebin2 is None:
-            raise ValidationError('Введите уникальный номер или БИН')
-
 
     def __str__(self):
         return '"' + self.name +'", ' + self.get_etype_display()
@@ -45,7 +39,15 @@ def file_path(instance, filename):
     datetime_str = _datetime.strftime("%Y-%m-%d")
     basefilename = datetime_str+randomstr
     return 'dogovora/{basename}{ext}'.format(basename= basefilename, ext= file_extension)
-        
+
+
+
+
+class Sub(models.Model):
+    created_at = models.DateField(auto_now_add=True, null=True,)
+    number = models.IntegerField('Номер Допника')
+    date_start = models.DateField('Дата Допника', null=True)
+    date_end = models.DateField('Окончание Допника', null=True)
 
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
@@ -58,6 +60,9 @@ class Dogovor(models.Model):
     date_start = models.DateField('Дата Договора', null=True)
     date_end = models.DateField('Окончание Договора', null=True)
     upload_file = models.FileField(null=True, upload_to=file_path)
+    subs = models.ForeignKey(Sub, on_delete=models.CASCADE, null=True, blank= True, verbose_name='Допника')
+    status = models.CharField('Статус', max_length=20, default='current', editable=False) 
+
 
 
     def publish(self):

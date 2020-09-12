@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-9">
+            {% for dogovor in dogovors %}
+                {{ dogovor.own_company }} {{ dogovor.side_two }} {{ dogovor.originity }} <br>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-3">
+            <form action="{% url 'search_list' %}" method="get">
+                <input name="q" type="text" placeholder="Search...">
+                <br>
+                    <div class="title">Наши компаний</div>
+                    <input class="all own" type="checkbox" value=0 id="own0">
+                    <label for="own_all">All</label><br>
+                {% for company in companys %}
+                    <input class="all own" type="checkbox" id="own{{ company.id }}" value={{ company.id }}>
+                    <label for="own{{ company.id }}"> {{ company }}</label><br>
+                {% endfor %}
+                    <input type="text" name="own" id="own" placeholder="Наши компаний">
+
+                    <div class="title">Контрагенты</div>
+                    <input class="all other" type="checkbox" value=0 id="other0">
+                    <label for="other_all">All</label><br>
+                {% for entity in entitys %}
+                    <input class="all other" type="checkbox" id="other{{entity.id}}" value={{ entity.id }}>
+                    <label for="other{{ entity.id }}">{{ entity }}</label><br>
+                {% endfor %}
+                    <input type="text" name="other" id="other" placeholder="Контрагенты">
+
+                    <div class="title">Имеется оригинал</div>
+                    <input class="all original" type="checkbox" value=0 id="original0">
+                    <label for="original_all">All</label><br>
+                    <input class="all  original" type="checkbox" id="original1" value=1>
+                    <label for=" original1">Да</label><br>
+                    <input class="all  original" type="checkbox" id="original2" value=2>
+                    <label for=" original2">Нет</label><br>
+                    <input type="text" name="original" id="original" placeholder="original">
+
+                    <div class="title">Начало Договора</div>
+                    <input type="date" name="date_start" id="date_start" value="2018-01-01">
+                    <input type="date" name="date_end" id="date_end" value="2021-01-01">
+                <button type="submit">asdasdsad</button>
+                <button type="button" onclick="size()">alert</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

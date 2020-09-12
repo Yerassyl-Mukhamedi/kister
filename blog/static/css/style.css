@@ -10,22 +10,15 @@
   cursor: pointer;
 }
 
-.entity_list .folder img {
-  width: 150px;
+.entity_list .name {
+  margin-top: 10px;
+  font-size: 18px;
 }
 
-.entity_list .folder .name {
-  margin-top: 30px;
+.entity_list h1 {
+  margin-bottom: 20px;
 }
 
-.entity_list .folder:hover {
-  cursor: pointer;
-}
-
-.entity_list .visible {
-  display: block;
-}
-
-.entity_list .hidden {
-  display: none;
+.super_only {
+  border: 1px solid red;
 }

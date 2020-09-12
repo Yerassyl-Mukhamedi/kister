@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    
+    {% for dogovor in dogovors %}
+        <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
+            {{ dogovor }}
+        </a>
+    {% endfor %}
+
+{% endblock %}

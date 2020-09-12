@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="dogovor_detail">
+        {% if dogovor %}
+            {% if dogovor.status == "current" %}
+                Создан: {{ dogovor.created_at }} <br>
+                Дата начала: {{ dogovor.date_start }} <br>
+                Дата окончания: {{ dogovor.date_end }} <br>
+                Наша компания: {{ dogovor.own_company }} <br>
+                Контрагент: {{ dogovor.side_two }} <br>
+                Документ: <a href="{{ dogovor.upload_file.url }}">{{ dogovor.upload_file }}</a> <br>
+                <a href="{%url 'dogovor_delete' pk=dogovor.pk pk_alt=dogovor.own_company.pk pk_altos=dogovor.side_two.pk %}"><button class="btn btn-warning">Удалить</button></a>
+            {% elif dogovor.status == "trash" %}
+                Удалено
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_superuser %}
+            <div class="super_only">
+                Создан: {{ dogovor.created_at }} <br>
+                Дата начала: {{ dogovor.date_start }} <br>
+                Дата окончания: {{ dogovor.date_end }} <br>
+                Наша компания: {{ dogovor.own_company }} <br>
+                Контрагент: {{ dogovor.side_two }} <br>
+                Документ: <a href="{{ dogovor.upload_file.url }}">{{ dogovor.upload_file }}</a> <br>
+                Status:  {{ dogovor.status }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

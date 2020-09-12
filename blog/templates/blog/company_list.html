@@ -3,14 +3,23 @@
     <div class="dogovor_list">
         <h1>Наши Компаний</h1>
         <div class="row">
-            {% for company in companys %}
+            <div class="col-md-9">
+                {% for company in companys %}
                 <a href="{% url 'entity_list' pk=company.id %}">
-                    <div class="col-md-3 folder">
+                    <div class="col-md-4 folder">
                         <img src="/media/images/folder.png">
-                        <div class="name">{{ company.name }}</div>
+                        <div class="name">{{ company }}</div>
                     </div>
                 </a>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="col-md-3">
+                <div class="poisk">
+                        <form action="{% url 'search_list' %}" method="get">
+                            <input name="q" type="text" placeholder="Search...">
+                        </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

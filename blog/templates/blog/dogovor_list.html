@@ -5,11 +5,15 @@
             <h1>Договора {{ company }} с {{side_two.name}}</h1>
         {% endif %}
         {% for dogovor in dogovors %}
-            <div class="dogovor">
-                Создан: {{ dogovor.created_at }}
-                Начало Договора: {{ dogovor.date_start }}
-                Конец Договора: {{ dogovor.date_end }}
-            </div>
+            {% if dogovor.status == "current" %}
+                <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
+                    <div class="dogovor">
+                        Создан: {{ dogovor.created_at }}
+                        Начало Договора: {{ dogovor.date_start }}
+                        Конец Договора: {{ dogovor.date_end }}
+                    </div>
+                </a>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
