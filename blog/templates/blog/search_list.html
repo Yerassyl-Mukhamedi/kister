@@ -2,8 +2,18 @@
 {% block content %}
     <div class="row">
         <div class="col-md-9">
+            <div class="title">Вторая сторона</div>
             {% for dogovor in dogovors %}
-                {{ dogovor.own_company }} {{ dogovor.side_two }} {{ dogovor.originity }} <br>
+                <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
+                    <div class="row"></div>
+                    {{ dogovor.id }} {{ dogovor.own_company }} {{ dogovor.side_two }} {{ dogovor.originity }} {{ dogovor.date_start }} <br>
+                </a>
+            {% endfor %}
+            <div class="title">Третья сторона</div>
+            {% for dogovor in dogovors_two %}
+                <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id pk_altos=dogovor.id %}">
+                    {{ dogovor.id }} {{ dogovor.own_company }} {{ dogovor.side_three }} {{ dogovor.originity }} {{ dogovor.date_start }} <br>
+                </a>
             {% endfor %}
 
         </div>
@@ -42,7 +52,6 @@
                     <input type="date" name="date_start" id="date_start" value="2018-01-01">
                     <input type="date" name="date_end" id="date_end" value="2021-01-01">
                 <button type="submit">asdasdsad</button>
-                <button type="button" onclick="size()">alert</button>
             </form>
         </div>
     </div>

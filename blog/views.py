@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.db.models import Q 
+from django.shortcuts import redirect
 from .models import *
+from .forms import *
 
 
 def dogovor_new(request):
@@ -19,13 +21,17 @@ def company_list(request):
     return render(request, 'blog/company_list.html', context)
 
 def dogovor_list(request, pk, pk_alt):
-    dogovors = Dogovor.objects.filter(own_company_id = pk).filter(side_two_id = pk_alt)
+    dogovors_two = Dogovor.objects.filter(own_company_id = pk).filter(side_two_id = pk_alt)
+    dogovors_three = Dogovor.objects.filter(own_company_id = pk).filter(side_three_id = pk_alt)
     company = OwnCompany.objects.get(id=pk)
     side_two = Entity.objects.get(id = pk_alt)
+    side_three = Entity.objects.get(id = pk_alt)
     context = {
-        'dogovors': dogovors,
+        'dogovors_two': dogovors_two,
+        'dogovors_three': dogovors_three,
         'company': company,
         'side_two': side_two,
+        'side_three': side_three,
     }
     return render(request, 'blog/dogovor_list.html', context)
 
@@ -34,10 +40,12 @@ def dogovor_detail(request, pk, pk_alt, pk_altos):
     dogovor = Dogovor.objects.get(id=pk_altos)
     company = OwnCompany.objects.get(id=pk)
     side_two = Entity.objects.get(id = pk_alt)
+    changed = Dogovor.objects.get(id=pk_altos).tracker.previous('number')
     context = {
         'dogovor': dogovor,
         'company': company,
         'side_two': side_two,
+        'changed': changed,
     }
     return render(request, 'blog/dogovor_detail.html', context)
 
@@ -72,26 +80,6 @@ def entity_list(request, pk):
     return render(request, 'blog/entity_list.html', context)
 
 
-def zapros_delete(request, pk, token):
-    currents = Zapros.objects.filter(id=pk)
-    currents.update(status='finished')
-    # send_mail(
-    # subject = 'That’s your subject',
-    # message = 'That’s your message body',
-    # from_email = 'mailer@btu.kz',
-    # recipient_list = ['mailer@btu.kz',],
-    # auth_user = 'mailer@btu.kz',
-    # auth_password = 'Pass1234',
-    # fail_silently = False,
-    # )
-
-    context = {
-        'currents': currents
-    }
-    return render(request, 'blog/zapros_detail.html', context)
-
-
-
 def delete_list(request):
     dogovors = Dogovor.objects.filter(status='trash')
     context = {
@@ -106,8 +94,6 @@ def search_list(request):
     original = request.GET.get('original')
     date_start = request.GET.get('date_start')
     date_end = request.GET.get('date_end')
-
-    
     own_ids = []
     other_ids = []
 
@@ -130,10 +116,11 @@ def search_list(request):
                 order.append(j+1)
         
     check_list(own, own_ids, OwnCompany)
-    check_list(other, other_ids, OwnCompany)
+    check_list(other, other_ids, Entity)
 
     entitys = Entity.objects.all()
-    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(date_start__range=[date_start, date_end]).order_by('own_company')
+    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
     # dogovors = Dogovor.objects
     
     companys = OwnCompany.objects.all()
@@ -141,7 +128,61 @@ def search_list(request):
         'dogovors': dogovors,
         'entitys': entitys,
         'companys': companys,
+        'dogovors_two': dogovors_two,
     }
 
 
     return render(request, 'blog/search_list.html', context)
+
+
+
+def expired_list(request):
+    dogovora = Dogovor.objects.all()
+    now = datetime.now().date()
+    spisok = []
+    for dog in dogovora:
+        if(now - dog.date_end >= now - now ):
+            spisok.append(dog.id)
+
+    dogovors = Dogovor.objects.filter(id__in = spisok)
+    
+
+        
+    context = {
+        'dogovors': dogovors
+    }
+    return render(request, 'blog/expired_list.html', context)
+
+
+def mail_list(request):
+    inmails = InMail.objects.all()
+    outmails = OutMail.objects.all()
+    context = {
+        'inmails': inmails,
+        'outmails': outmails,
+    }
+    return render(request, 'blog/mail_list.html', context)
+
+
+
+def mail_detail(request, status, pk):
+    if(status == 'incoming'):
+        mail = InMail.objects.get(id=pk)
+        try:
+            responses = OutMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+    elif(status == 'outcoming'):
+        mail = OutMail.objects.get(id=pk)
+        try:
+            responses = InMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+
+
+    context = {
+        'mail': mail,
+        'responses': responses,
+    }
+    return render(request, 'blog/mail_detail.html', context)
+

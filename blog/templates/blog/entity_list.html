@@ -6,9 +6,12 @@
         {% endif %}
         <div id="check_list">
             {% for dogovor in dogovors %}
-                <a href="{% url 'dogovor_list' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id %}" class="{{dogovor.side_two.name}}" id="{{dogovor.side_two.name}}">
-                    <div class="name">{{ dogovor.side_two.name }}</div>
-                </a>
+            <a href="{% url 'dogovor_list' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id %}" class="{{dogovor.side_two.name}}" id="{{dogovor.side_two.name}}">
+                <div class="name">{{ dogovor.side_two.name }}</div>
+            </a>
+            <a href="{% url 'dogovor_list' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id %}" class="{{dogovor.side_three.name}}" id="{{dogovor.side_three.name}}">
+                <div class="name">{{ dogovor.side_three.name }}</div>
+            </a>
             {% endfor %}
         </div>
     </div>

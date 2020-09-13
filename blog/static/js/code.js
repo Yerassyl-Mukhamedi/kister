@@ -116,7 +116,13 @@ if (window.location.href.indexOf("entity_list") > -1) {
         }
     }
 }
+$( "#delete" ).click(function() {
+    $("#wrap").show()
+    $("#delete").hide()
+});
 
-function size(){
-    alert($("#date").val())
-}
+
+$( "#no" ).click(function() {
+    $("#wrap").hide()
+    $("#delete").show()
+});

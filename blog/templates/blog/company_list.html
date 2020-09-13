@@ -15,9 +15,15 @@
             </div>
             <div class="col-md-3">
                 <div class="poisk">
-                        <form action="{% url 'search_list' %}" method="get">
-                            <input name="q" type="text" placeholder="Search...">
-                        </form>
+                    <form action="{% url 'search_list' %}" method="get">
+                        <input class="input" name="q" type="text" placeholder="Search...">
+                        <input class="input" type="text" name="own" id="own" placeholder="Наши компаний">
+                        <input class="input" type="text" name="other" id="other" placeholder="Контрагенты">
+                        <input class="input" type="text" name="original" id="original" placeholder="original">
+                        <input class="input" type="date" name="date_start" id="date_start" value="2018-01-01">
+                        <input class="input" type="date" name="date_end" id="date_end" value="2021-01-01">
+                        <button type="submit">Поиск</button>
+                    </form>
                 </div>
             </div>
         </div>

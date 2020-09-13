@@ -1,0 +1,86 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="mail_list">
+
+        <div class="title">Список писем</div>
+        
+        <div class="row">
+            <div class="col-md-6 left">
+                <div class="row top">
+                    <div class="col-md-3">
+                        <div class="sub_title">Входящие</div>
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{% url 'admin:blog_inmail_add' %}"><img class="plus" src="/media/images/plus.png"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sub_label col-md-4">
+                        Кому
+                    </div>
+                    <div class="sub_label col-md-4">
+                        От кого
+                    </div>
+                    <div class="sub_label col-md-4">
+                        Дата создания
+                    </div>
+                </div>
+                {% for mail in inmails %}
+                <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ mail.own_company }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ mail.side_two }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ mail.created_at }}
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                
+            
+            </div>
+            <div class="col-md-6">
+                <div class="row top">
+                    <div class="col-md-3">
+                        <div class="sub_title">Исходящие</div>                
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{% url 'admin:blog_outmail_add' %}"><img class="plus" src="/media/images/plus.png"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sub_label col-md-4">
+                        От кого
+                    </div>
+                    <div class="sub_label col-md-4">
+                        Кому
+                    </div>
+                    <div class="sub_label col-md-4">
+                        Дата создания
+                    </div>
+                </div>
+                {% for mail in outmails %}
+
+                <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ mail.own_company }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ mail.side_two }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ mail.created_at }}
+                        </div>
+                    </div>
+                </a>    
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+        

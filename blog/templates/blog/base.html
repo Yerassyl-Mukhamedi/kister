@@ -9,6 +9,11 @@
             <link rel="stylesheet" href="{% static 'css/style.css' %}">
         </head>
         <body>
+            <div class="container header">
+                <a href="{% url 'company_list' %}"><div>Список Компаний</div></a>
+                <a href="{% url 'mail_list' %}"><div>Список Писем</div></a>
+                <a href="{% url 'expired_list' %}"><div>Просроченные</div></a>
+            </div>
             <div class="container">
                 {% block content %}
                 {% endblock %}

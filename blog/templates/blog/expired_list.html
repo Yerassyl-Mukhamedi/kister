@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for dogovor in dogovors %}
+        {{ dogovor.own_company }}
+        {{ dogovor.side_two }}
+        {{ dogovor.date_end }} <br>
+    {% endfor %}
+{% endblock %}

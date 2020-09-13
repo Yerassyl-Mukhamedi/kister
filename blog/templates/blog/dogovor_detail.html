@@ -3,13 +3,120 @@
     <div class="dogovor_detail">
         {% if dogovor %}
             {% if dogovor.status == "current" %}
-                Создан: {{ dogovor.created_at }} <br>
-                Дата начала: {{ dogovor.date_start }} <br>
-                Дата окончания: {{ dogovor.date_end }} <br>
-                Наша компания: {{ dogovor.own_company }} <br>
-                Контрагент: {{ dogovor.side_two }} <br>
-                Документ: <a href="{{ dogovor.upload_file.url }}">{{ dogovor.upload_file }}</a> <br>
-                <a href="{%url 'dogovor_delete' pk=dogovor.pk pk_alt=dogovor.own_company.pk pk_altos=dogovor.side_two.pk %}"><button class="btn btn-warning">Удалить</button></a>
+                <div class="row">
+                    <div class="col-md-3">
+                        Создан
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.created_at }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Номер договора
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.number }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Дата начала  <br>
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.date_start }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Дата окончания<br>
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.date_end }} 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Наша компания  
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.own_company }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Контрагент  
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.side_two }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Контрагент 2  
+                    </div>
+                    <div class="col-md-7">
+                        {{ dogovor.side_three }}
+                    </div>
+                </div>
+                {% if dogovor.upload_file %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Документ 1 
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{{ dogovor.upload_file.url }}">File</a> 
+                        </div>
+                    </div>
+                    <br>
+                {% endif %}
+                {% if dogovor.upload_file2 %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Документ 2 
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{{ dogovor.upload_file2.url }}">File2</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if dogovor.upload_file3 %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Документ 3 
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{{ dogovor.upload_file3.url }}">File3</a> 
+                        </div>
+                    </div>
+                    Документ 3<br>
+                {% endif %}
+                {% if dogovor.upload_file4 %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Документ 4 
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{{ dogovor.upload_file4.url }}">File4</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if dogovor.upload_file5 %}    
+                    <div class="row">
+                        <div class="col-md-3">
+                            Документ 5 
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{{ dogovor.upload_file5.url }}">File5</a>
+                        </div>
+                    </div>           
+                {% endif %}
+                <button class="btn" id="delete">Удалить</button>
+                <div id="wrap">
+                    <h4>Вы уверены что хотите удалить?</h4>
+                    <a href="{%url 'dogovor_delete' pk=dogovor.pk pk_alt=dogovor.own_company.pk pk_altos=dogovor.side_two.pk %}"><button class="btn btn-warning">Да</button></a>
+                    <button class="btn" id="no">Нет</button>
+                </div>
             {% elif dogovor.status == "trash" %}
                 Удалено
             {% endif %}
@@ -17,13 +124,27 @@
 
         {% if user.is_superuser %}
             <div class="super_only">
-                Создан: {{ dogovor.created_at }} <br>
-                Дата начала: {{ dogovor.date_start }} <br>
-                Дата окончания: {{ dogovor.date_end }} <br>
-                Наша компания: {{ dogovor.own_company }} <br>
-                Контрагент: {{ dogovor.side_two }} <br>
-                Документ: <a href="{{ dogovor.upload_file.url }}">{{ dogovor.upload_file }}</a> <br>
-                Status:  {{ dogovor.status }}
+                Создан {{ dogovor.created_at }} <br>
+                Дата начала {{ dogovor.date_start }} <br>
+                Дата окончания {{ dogovor.date_end }} <br>
+                Наша компания {{ dogovor.own_company }} <br>
+                Контрагент {{ dogovor.side_two }} <br>
+                {% if dogovor.upload_file %}
+                    Документ 1 <a href="{{ dogovor.upload_file.url }}">{{ dogovor.upload_file }}</a> <br>
+                {% endif %}
+                {% if dogovor.upload_file2 %}
+                    Документ 2 <a href="{{ dogovor.upload_file2.url }}">{{ dogovor.upload_file2 }}</a> <br>
+                {% endif %}
+                {% if dogovor.upload_file3 %}
+                    Документ 3 <a href="{{ dogovor.upload_file3.url }}">{{ dogovor.upload_file3 }}</a> <br>
+                {% endif %}
+                {% if dogovor.upload_file4 %}
+                    Документ 4 <a href="{{ dogovor.upload_file4.url }}">{{ dogovor.upload_file4 }}</a> <br>
+                {% endif %}
+                {% if dogovor.upload_file5 %}                
+                    Документ 5 <a href="{{ dogovor.upload_file5.url }}">{{ dogovor.upload_file5 }}</a> <br>
+                {% endif %}
+                Status  {{ dogovor.status }}
             </div>
         {% endif %}
     </div>

@@ -22,3 +22,74 @@
 .super_only {
   border: 1px solid red;
 }
+
+.poisk .input {
+  display: none;
+}
+
+.header {
+  display: flex;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.header div {
+  margin-right: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.mail_list .left {
+  border-right: 1px solid black;
+  padding-bottom: 200px;
+}
+
+.mail_list .title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.mail_list .sub_title {
+  font-weight: bold;
+  font-size: 16;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.mail_list .sub_label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.mail_list .top {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mail_list .top .plus {
+  width: 50px;
+}
+
+.mail_detail .title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.dogovor_detail #wrap {
+  display: none;
+}
+
+.dogovor_detail #delete {
+  margin-top: 400px;
+}
+
+.dogovor_detail .row {
+  font-size: 16px;
+  border-bottom: 1px solid black;
+}
+
+.dogovor_detail .row .col-md-3 {
+  font-weight: bold;
+}

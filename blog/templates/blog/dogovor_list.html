@@ -6,7 +6,32 @@
         {% endif %}
         {% for dogovor in dogovors %}
             {% if dogovor.status == "current" %}
+                <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id pk_altos=dogovor.id %}">
+                    <div class="dogovor">
+                        Создан: {{ dogovor.created_at }}
+                        Начало Договора: {{ dogovor.date_start }}
+                        Конец Договора: {{ dogovor.date_end }}
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        <div class="title">Вторая сторона</div>
+        {% for dogovor in dogovors_two %}
+            {% if dogovor.status == "current" %}
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
+                    <div class="dogovor">
+                        Создан: {{ dogovor.created_at }}
+                        Начало Договора: {{ dogovor.date_start }}
+                        Конец Договора: {{ dogovor.date_end }}
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+        <div class="title">Третья сторона</div>
+        {% for dogovor in dogovors_three %}
+            {% if dogovor.status == "current" %}
+                <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id pk_altos=dogovor.id %}">
                     <div class="dogovor">
                         Создан: {{ dogovor.created_at }}
                         Начало Договора: {{ dogovor.date_start }}
