@@ -7,7 +7,6 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from model_utils import FieldTracker
 from .choices import *
 
 import os, random
@@ -51,7 +50,7 @@ class Sub(models.Model):
     number = models.IntegerField('Номер Допника')
     date_start = models.DateField('Дата Допника', null=True)
     date_end = models.DateField('Окончание Допника', null=True)
-    tracker = FieldTracker()
+
 
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
@@ -72,7 +71,7 @@ class Dogovor(models.Model):
     upload_file3 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file4 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file5 = models.FileField(null=True, blank=True, upload_to=file_path)
-    tracker = FieldTracker()
+
 
 
 
