@@ -59,6 +59,17 @@
                         {{ dogovor.side_three }}
                     </div>
                 </div>
+                {% if dogovor.subs %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Имеется допник
+                        </div>
+                        <div class="col-md-7">
+                            <a href="{% url 'sub_detail' pk=dogovor.subs.id %}">{{ dogovor.subs.id }}</a>
+                        </div>
+                    </div>
+                    <br>
+                {% endif %}
                 {% if dogovor.upload_file %}
                     <div class="row">
                         <div class="col-md-3">

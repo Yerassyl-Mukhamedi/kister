@@ -8,6 +8,9 @@
             Кому: {{ mail.own_company }} <br>
             От кого: {{ mail.side_two }} <br>
             Тема: {{ mail.topic }} <br>
+            {% if mail.upload_file %}
+                File:  <a href="{{ mail.upload_file.url }}">{{ mail.upload_file }}</a> <br>
+            {% endif %}
             
             {% if mail.response_to != None %}
                 Письмо является ответом на: <a href="{% url 'mail_detail' status=mail.response_to.status pk=mail.response_to.id %}">{{ mail.response_to }}</a> <br>
@@ -19,6 +22,9 @@
             Кому: {{ mail.side_two }} <br>
             От кого: {{ mail.own_company }} <br>
             Тема: {{ mail.topic }} <br>
+            {% if mail.upload_file %}
+                File:  <a href="{{ mail.upload_file.url }}">{{ mail.upload_file }}</a> <br>
+            {% endif %}
             {% if mail.response_to != None %}
                 Письмо является ответом на: <a href="{% url 'mail_detail' status=mail.response_to.status pk=mail.response_to.id %}">{{ mail.response_to }}</a> <br>
             {% endif %}

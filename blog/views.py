@@ -40,12 +40,10 @@ def dogovor_detail(request, pk, pk_alt, pk_altos):
     dogovor = Dogovor.objects.get(id=pk_altos)
     company = OwnCompany.objects.get(id=pk)
     side_two = Entity.objects.get(id = pk_alt)
-    changed = Dogovor.objects.get(id=pk_altos).tracker.previous('number')
     context = {
         'dogovor': dogovor,
         'company': company,
         'side_two': side_two,
-        'changed': changed,
     }
     return render(request, 'blog/dogovor_detail.html', context)
 
@@ -92,6 +90,7 @@ def search_list(request):
     own = request.GET.get('own')
     other = request.GET.get('other')
     original = request.GET.get('original')
+    auto = request.GET.get('auto')
     date_start = request.GET.get('date_start')
     date_end = request.GET.get('date_end')
     own_ids = []
@@ -102,6 +101,11 @@ def search_list(request):
         original_ids = [1,2]
     else: 
         original_ids = original
+
+    if(len(auto)<1):
+        auto_ids = [1,2]
+    else: 
+        auto_ids = auto
 
     
     def check_list(target, order, model):
@@ -119,8 +123,8 @@ def search_list(request):
     check_list(other, other_ids, Entity)
 
     entitys = Entity.objects.all()
-    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
-    dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
     # dogovors = Dogovor.objects
     
     companys = OwnCompany.objects.all()
@@ -185,4 +189,14 @@ def mail_detail(request, status, pk):
         'responses': responses,
     }
     return render(request, 'blog/mail_detail.html', context)
+
+
+def sub_detail(request, pk):
+    sub = Sub.objects.get(id=pk)
+    dogovors = Dogovor.objects.filter(subs_id = pk)
+    context = {
+        'sub': sub,
+        'dogovors': dogovors,
+    }
+    return render(request, 'blog/sub_detail.html', context)
 

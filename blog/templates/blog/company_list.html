@@ -2,15 +2,16 @@
 {% block content %}
     <div class="dogovor_list">
         <h1>Наши Компаний</h1>
+        <a href="{% url 'admin:blog_dogovor_add' %}"><img class="plus" src="/media/images/plus.png"></a>
         <div class="row">
             <div class="col-md-9">
                 {% for company in companys %}
-                <a href="{% url 'entity_list' pk=company.id %}">
-                    <div class="col-md-4 folder">
-                        <img src="/media/images/folder.png">
-                        <div class="name">{{ company }}</div>
-                    </div>
-                </a>
+                    <a href="{% url 'entity_list' pk=company.id %}">
+                        <div class="col-md-4 folder">
+                            <img src="/media/images/folder.png">
+                            <div class="name">{{ company }}</div>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
             <div class="col-md-3">
@@ -20,6 +21,7 @@
                         <input class="input" type="text" name="own" id="own" placeholder="Наши компаний">
                         <input class="input" type="text" name="other" id="other" placeholder="Контрагенты">
                         <input class="input" type="text" name="original" id="original" placeholder="original">
+                        <input class="input" type="text" name="auto" id="auto" placeholder="auto">
                         <input class="input" type="date" name="date_start" id="date_start" value="2018-01-01">
                         <input class="input" type="date" name="date_end" id="date_end" value="2021-01-01">
                         <button type="submit">Поиск</button>

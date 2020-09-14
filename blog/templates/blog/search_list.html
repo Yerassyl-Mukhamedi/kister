@@ -1,58 +1,94 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+<div class="search_list">        
     <div class="row">
         <div class="col-md-9">
             <div class="title">Вторая сторона</div>
+            <div class="row sub_titles">
+                <div class="col-md-1">Номер</div>
+                <div class="col-md-3">Наша компания</div>
+                <div class="col-md-3">Контрагент</div>
+                <div class="col-md-3">Дата</div>
+                <div class="col-md-1">Имеется оригинал</div>
+                <div class="col-md-1">Авто продление</div>
+            </div>
             {% for dogovor in dogovors %}
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
-                    <div class="row"></div>
-                    {{ dogovor.id }} {{ dogovor.own_company }} {{ dogovor.side_two }} {{ dogovor.originity }} {{ dogovor.date_start }} <br>
+                    <div class="row line">
+                        <div class="col-md-1">{{ dogovor.number }}</div>
+                        <div class="col-md-3">{{ dogovor.own_company }}</div>
+                        <div class="col-md-3">{{ dogovor.side_two }}</div>
+                        <div class="col-md-3">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-1">{{ dogovor.get_originity_display }}</div>
+                        <div class="col-md-1">{{ dogovor.get_renew_display }}</div>
+                    </div>
                 </a>
             {% endfor %}
             <div class="title">Третья сторона</div>
             {% for dogovor in dogovors_two %}
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id pk_altos=dogovor.id %}">
-                    {{ dogovor.id }} {{ dogovor.own_company }} {{ dogovor.side_three }} {{ dogovor.originity }} {{ dogovor.date_start }} <br>
+                    <div class="row line">
+                        <div class="col-md-1">{{ dogovor.number }}</div>
+                        <div class="col-md-3">{{ dogovor.own_company }}</div>
+                        <div class="col-md-3">{{ dogovor.side_three }}</div>
+                        <div class="col-md-3">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-1">{{ dogovor.get_originity_display }}</div>
+                        <div class="col-md-1">{{ dogovor.get_renew_display }}</div>
+                    </div>
                 </a>
             {% endfor %}
 
         </div>
         <div class="col-md-3">
             <form action="{% url 'search_list' %}" method="get">
-                <input name="q" type="text" placeholder="Search...">
+                <input name="q" class="hade" type="text" placeholder="Search...">
                 <br>
                     <div class="title">Наши компаний</div>
                     <input class="all own" type="checkbox" value=0 id="own0">
-                    <label for="own_all">All</label><br>
+                    <label for="own_all">Все</label><br>
                 {% for company in companys %}
                     <input class="all own" type="checkbox" id="own{{ company.id }}" value={{ company.id }}>
                     <label for="own{{ company.id }}"> {{ company }}</label><br>
                 {% endfor %}
-                    <input type="text" name="own" id="own" placeholder="Наши компаний">
+                    <input type="text" class="hade" name="own" id="own" placeholder="Наши компаний">
 
                     <div class="title">Контрагенты</div>
                     <input class="all other" type="checkbox" value=0 id="other0">
-                    <label for="other_all">All</label><br>
+                    <label for="other_all">Все</label><br>
                 {% for entity in entitys %}
                     <input class="all other" type="checkbox" id="other{{entity.id}}" value={{ entity.id }}>
                     <label for="other{{ entity.id }}">{{ entity }}</label><br>
                 {% endfor %}
-                    <input type="text" name="other" id="other" placeholder="Контрагенты">
+                    <input type="text" class="hade" name="other" id="other" placeholder="Контрагенты">
 
                     <div class="title">Имеется оригинал</div>
                     <input class="all original" type="checkbox" value=0 id="original0">
-                    <label for="original_all">All</label><br>
+                    <label for="original_all">Все</label><br>
                     <input class="all  original" type="checkbox" id="original1" value=1>
                     <label for=" original1">Да</label><br>
                     <input class="all  original" type="checkbox" id="original2" value=2>
                     <label for=" original2">Нет</label><br>
-                    <input type="text" name="original" id="original" placeholder="original">
+                    <input type="text" class="hade" name="original" id="original" placeholder="original">
+
+
+
+                    <div class="title">Авто продление</div>
+                    <input class="all auto" type="checkbox" value=0 id="auto0">
+                    <label for="auto_all">Все</label><br>
+                    <input class="all  auto" type="checkbox" id="auto1" value=1>
+                    <label for=" auto1">Да</label><br>
+                    <input class="all  auto" type="checkbox" id="auto2" value=2>
+                    <label for=" auto2">Нет</label><br>
+                    <input type="text" class="hade" name="auto" id="auto" placeholder="auto">
+
+
 
                     <div class="title">Начало Договора</div>
                     <input type="date" name="date_start" id="date_start" value="2018-01-01">
                     <input type="date" name="date_end" id="date_end" value="2021-01-01">
-                <button type="submit">asdasdsad</button>
+                <button type="submit">Поиск</button>
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

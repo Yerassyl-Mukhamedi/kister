@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+    {% for dogovor in dogovors %}
+        <div class="row">
+            <div class="col-md-2">Основной документ</div>
+            <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
+            <div class="col-md-3">{{ dogovor.own_company }} ==>> {{ dogovor.side_two }} {% if dogovor.side_three %} {{ dogovor.side_three }}{% endif %}</div></a>
+    </div>
+    {% endfor %}
+
+    {% if sub %}
+        <div class="row">
+            <div class="col-md-2">Номер Допника</div>
+            <div class="col-md-3">{{ sub }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Дата начала</div>
+            <div class="col-md-3">{{ sub.date_start }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Дата окончания</div>
+            <div class="col-md-3">{{ sub.date_end }}</div>
+        </div>
+        {% if sub.upload_file1 %}
+            <div class="row">
+                <div class="col-md-2">Скан</div>
+                <a href="{{ sub.upload_file1.url }}"><div class="col-md-3">{{ sub.upload_file1 }}</div></a>
+            </div>
+        {% endif %}
+        {% if sub.upload_file2 %}
+            <div class="row">
+                <div class="col-md-2">Скан</div>
+                <a href="{{ sub.upload_file2.url }}"><div class="col-md-3">{{ sub.upload_file2 }}</div></a>
+            </div>
+        {% endif %}
+        {% if sub.upload_file3 %}
+            <div class="row">
+                <div class="col-md-2">Скан</div>
+                <a href="{{ sub.upload_file3.url }}"><div class="col-md-3">{{ sub.upload_file3 }}</div></a>
+            </div>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}

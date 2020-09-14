@@ -15,7 +15,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="sub_label col-md-4">
+                    <div class="sub_label col-md-1">
+                        #
+                    </div>
+                    <div class="sub_label col-md-3">
                         Кому
                     </div>
                     <div class="sub_label col-md-4">
@@ -28,7 +31,10 @@
                 {% for mail in inmails %}
                 <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-1">
+                            {{ mail.in_number }}
+                        </div>
+                        <div class="col-md-3">
                             {{ mail.own_company }}
                         </div>
                         <div class="col-md-4">
@@ -53,7 +59,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="sub_label col-md-4">
+                    <div class="sub_label col-md-1">
+                        #
+                    </div>
+                    <div class="sub_label col-md-3">
                         От кого
                     </div>
                     <div class="sub_label col-md-4">
@@ -67,7 +76,10 @@
 
                 <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-1">
+                            {{ mail.out_number }}
+                        </div>
+                        <div class="col-md-3">
                             {{ mail.own_company }}
                         </div>
                         <div class="col-md-4">

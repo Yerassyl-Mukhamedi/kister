@@ -50,7 +50,12 @@ class Sub(models.Model):
     number = models.IntegerField('Номер Допника')
     date_start = models.DateField('Дата Допника', null=True)
     date_end = models.DateField('Окончание Допника', null=True)
+    upload_file1 = models.FileField(null=True, blank=True, upload_to=file_path)
+    upload_file2 = models.FileField(null=True, blank=True, upload_to=file_path)
+    upload_file3 = models.FileField(null=True, blank=True, upload_to=file_path)
 
+    def __str__(self):
+        return str(self.number)
 
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
@@ -62,6 +67,7 @@ class Dogovor(models.Model):
     signer_three = models.CharField('Подписант 3', max_length=1, choices=signer_choice, blank=True, default='1') 
     number = models.IntegerField('Номер Договора')
     originity = models.CharField('Имеется Оригинал', max_length=1, choices=resident_choice, default='1')
+    renew = models.CharField('Авто Продление', max_length=1, choices=resident_choice, default='1')
     date_start = models.DateField('Дата Договора', null=True)
     date_end = models.DateField('Окончание Договора', null=True)
     upload_file = models.FileField(null=True, blank=True, upload_to=file_path)
@@ -71,7 +77,6 @@ class Dogovor(models.Model):
     upload_file3 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file4 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file5 = models.FileField(null=True, blank=True, upload_to=file_path)
-
 
 
 

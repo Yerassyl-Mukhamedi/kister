@@ -10,6 +10,9 @@
     .folder:hover{
         cursor: pointer;
     }
+    .plus{
+        width: 60px;
+    }
 }
 
 .entity_list{
@@ -94,6 +97,29 @@
         border-bottom: 1px solid black;
         .col-md-3{
             font-weight: bold;
+        }
+    }
+}
+
+.search_list{
+    .title{
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
+    .sub_titles{
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .line{
+        border-bottom: 1px solid black;
+    }
+    .hade{
+    }
+    form{
+        .title{
+            margin-bottom: 0;
         }
     }
 }

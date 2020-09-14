@@ -39,6 +39,7 @@
 own = []
 other = []
 original = []
+auto = []
 
 $(".all").change(function() {
     pk = this.id
@@ -51,6 +52,9 @@ $(".all").change(function() {
     }
     else if(this.id.includes('original')){
         list = original;
+    }
+    else if(this.id.includes('auto')){
+        list = auto;
     }
     
     if(this.checked) {
@@ -74,6 +78,9 @@ $(".all").change(function() {
         else if(this.id.includes('original')){
             original = list;
         }
+        else if(this.id.includes('auto')){
+            auto = list;
+        }
     }
     else{
         if(this.id.includes('0')){
@@ -96,6 +103,9 @@ $(".all").change(function() {
         } 
         else if(this.id.includes('original')){
             original = list;
+        }
+        else if(this.id.includes('auto')){
+            auto = list;
         }
     }
     $( "#" + this.classList[1] ).val(list);
