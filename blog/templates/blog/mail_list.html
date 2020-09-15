@@ -2,7 +2,18 @@
 {% block content %}
     <div class="mail_list">
 
-        <div class="title">Список писем</div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="title">Список писем</div>
+            </div>
+            <div class="col-md-2">
+                <form action="{% url 'mail_search' %}" method="get">
+                    <input class="input" type="text" name="own" id="own" placeholder="Наши компаний">
+                    <input class="input" type="text" name="other" id="other" placeholder="Контрагенты">
+                    <button type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-6 left">

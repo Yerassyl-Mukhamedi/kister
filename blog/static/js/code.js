@@ -40,6 +40,7 @@ own = []
 other = []
 original = []
 auto = []
+init = []
 
 $(".all").change(function() {
     pk = this.id
@@ -55,6 +56,9 @@ $(".all").change(function() {
     }
     else if(this.id.includes('auto')){
         list = auto;
+    }
+    else if(this.id.includes('init')){
+        list = init;
     }
     
     if(this.checked) {
@@ -80,6 +84,9 @@ $(".all").change(function() {
         }
         else if(this.id.includes('auto')){
             auto = list;
+        }
+        else if(this.id.includes('init')){
+            init = list;
         }
     }
     else{
@@ -107,9 +114,11 @@ $(".all").change(function() {
         else if(this.id.includes('auto')){
             auto = list;
         }
+        else if(this.id.includes('init')){
+            init = list;
+        }
     }
     $( "#" + this.classList[1] ).val(list);
-
 });
 
 if (window.location.href.indexOf("entity_list") > -1) {

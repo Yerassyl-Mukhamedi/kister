@@ -13,6 +13,7 @@ urlpatterns = [
     path('dogovor_delete/<int:pk>/<int:pk_alt>/<int:pk_altos>/', views.dogovor_delete, name='dogovor_delete'),
     path('delete_list/', views.delete_list, name='delete_list'),
     path('search_list/', views.search_list, name='search_list'),
+    path('mail_search/', views.mail_search, name='mail_search'),
     path('expired_list/', views.expired_list, name='expired_list'),
     path('mail_detail/<str:status>/<int:pk>', views.mail_detail, name='mail_detail'),
     path('sub_detail/<int:pk>', views.sub_detail, name='sub_detail'),

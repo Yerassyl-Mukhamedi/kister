@@ -8,6 +8,7 @@ admin.site.register(OwnCompany)
 admin.site.register(Sub)
 admin.site.register(InMail)
 admin.site.register(OutMail)
+admin.site.register(Worker)
 
 class DogovorAdmin(admin.ModelAdmin):
     readonly_fields=('status')

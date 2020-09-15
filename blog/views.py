@@ -86,15 +86,28 @@ def delete_list(request):
     return render(request, 'blog/delete_list.html', context)
 
 
+def check_list(target, order, model):
+    counter = model.objects.all().count()
+
+    if len(target) > 0:    
+        for i in target:
+            if i != ",":
+                order.append(int(i))
+    else:
+        for j in range(counter):
+            order.append(j+1)
+
 def search_list(request):
     own = request.GET.get('own')
     other = request.GET.get('other')
+    init = request.GET.get('init')
     original = request.GET.get('original')
     auto = request.GET.get('auto')
     date_start = request.GET.get('date_start')
     date_end = request.GET.get('date_end')
     own_ids = []
     other_ids = []
+    init_ids = []
 
 
     if(len(original)<1):
@@ -106,31 +119,22 @@ def search_list(request):
         auto_ids = [1,2]
     else: 
         auto_ids = auto
-
     
-    def check_list(target, order, model):
-        counter = model.objects.all().count()
-
-        if len(target) > 0:    
-            for i in target:
-                if i != ",":
-                    order.append(int(i))
-        else:
-            for j in range(counter):
-                order.append(j+1)
-        
     check_list(own, own_ids, OwnCompany)
     check_list(other, other_ids, Entity)
+    check_list(init, init_ids, Worker)
 
     entitys = Entity.objects.all()
-    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
-    dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    inits = Worker.objects.all()
+    companys = OwnCompany.objects.all()
+    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(init_id__in = init_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(init_id__in = init_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
     # dogovors = Dogovor.objects
     
-    companys = OwnCompany.objects.all()
     context = {
         'dogovors': dogovors,
         'entitys': entitys,
+        'inits': inits,
         'companys': companys,
         'dogovors_two': dogovors_two,
     }
@@ -139,6 +143,27 @@ def search_list(request):
     return render(request, 'blog/search_list.html', context)
 
 
+
+def mail_search(request):
+    own = request.GET.get('own')
+    other = request.GET.get('other')
+    own_ids = []
+    other_ids = []
+
+    entitys = Entity.objects.all()
+    inits = Worker.objects.all()
+    companys = OwnCompany.objects.all()
+    check_list(own, own_ids, OwnCompany)
+    check_list(other, other_ids, Entity)
+
+    mails = InMail.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids)
+    context = {
+        'mails': mails,
+        'entitys': entitys,
+        'inits': inits,
+        'companys': companys,
+    }
+    return render(request, 'blog/mail_search.html', context)
 
 def expired_list(request):
     dogovora = Dogovor.objects.all()

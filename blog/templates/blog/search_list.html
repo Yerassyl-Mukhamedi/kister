@@ -6,9 +6,10 @@
             <div class="title">Вторая сторона</div>
             <div class="row sub_titles">
                 <div class="col-md-1">Номер</div>
-                <div class="col-md-3">Наша компания</div>
+                <div class="col-md-2">Наша компания</div>
                 <div class="col-md-3">Контрагент</div>
-                <div class="col-md-3">Дата</div>
+                <div class="col-md-2">Дата</div>
+                <div class="col-md-2">Инициатор</div>
                 <div class="col-md-1">Имеется оригинал</div>
                 <div class="col-md-1">Авто продление</div>
             </div>
@@ -16,9 +17,10 @@
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
                     <div class="row line">
                         <div class="col-md-1">{{ dogovor.number }}</div>
-                        <div class="col-md-3">{{ dogovor.own_company }}</div>
+                        <div class="col-md-2">{{ dogovor.own_company }}</div>
                         <div class="col-md-3">{{ dogovor.side_two }}</div>
-                        <div class="col-md-3">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-2">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-2">{{ dogovor.init.name }}</div>
                         <div class="col-md-1">{{ dogovor.get_originity_display }}</div>
                         <div class="col-md-1">{{ dogovor.get_renew_display }}</div>
                     </div>
@@ -29,9 +31,10 @@
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_three.id pk_altos=dogovor.id %}">
                     <div class="row line">
                         <div class="col-md-1">{{ dogovor.number }}</div>
-                        <div class="col-md-3">{{ dogovor.own_company }}</div>
+                        <div class="col-md-2">{{ dogovor.own_company }}</div>
                         <div class="col-md-3">{{ dogovor.side_three }}</div>
-                        <div class="col-md-3">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-2">{{ dogovor.date_start|date:'d-m-Y' }}</div>
+                        <div class="col-md-2">{{ dogovor.init.name }}</div>
                         <div class="col-md-1">{{ dogovor.get_originity_display }}</div>
                         <div class="col-md-1">{{ dogovor.get_renew_display }}</div>
                     </div>
@@ -60,6 +63,17 @@
                     <label for="other{{ entity.id }}">{{ entity }}</label><br>
                 {% endfor %}
                     <input type="text" class="hade" name="other" id="other" placeholder="Контрагенты">
+
+                    
+                    <div class="title">Инициатор</div>
+                    <input class="all init" type="checkbox" value=0 id="init0">
+                    <label for="init_all">Все</label><br>
+                {% for init in inits %}
+                    <input class="all init" type="checkbox" id="init{{init.id}}" value={{ init.id }}>
+                    <label for="init{{ init.id }}">{{ init }}</label><br>
+                {% endfor %}
+                    <input type="text" class="hade" name="init" id="init" placeholder="Контрагенты">
+
 
                     <div class="title">Имеется оригинал</div>
                     <input class="all original" type="checkbox" value=0 id="original0">

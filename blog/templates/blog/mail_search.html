@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="mail_search">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row sub_titles">
+                    <div class="col-md-1">Номер</div>
+                    <div class="col-md-3">Наша компания</div>
+                    <div class="col-md-3">Контрагент</div>
+                </div>
+                {% for mail in mails %}
+                <div class="row">
+                    <div class="col-md-1">{{mail.in_number}}</div>
+                    <div class="col-md-3">{{mail.own_company}}</div>
+                    <div class="col-md-3">{{mail.side_two.name}}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-3">
+                <form action="{% url 'mail_search' %}" method="get">
+                    <div class="title">Наши компаний</div>
+                    <input class="all own" type="checkbox" value=0 id="own0">
+                    <label for="own_all">Все</label><br>
+                    {% for company in companys %}
+                        <input class="all own" type="checkbox" id="own{{ company.id }}" value={{ company.id }}>
+                        <label for="own{{ company.id }}"> {{ company }}</label><br>
+                    {% endfor %}
+                    <input type="text" class="hade" name="own" id="own" placeholder="Наши компаний">
+                    <div class="title">Контрагенты</div>
+                    <input class="all other" type="checkbox" value=0 id="other0">
+                    <label for="other_all">Все</label><br>
+                    {% for entity in entitys %}
+                        <input class="all other" type="checkbox" id="other{{entity.id}}" value={{ entity.id }}>
+                        <label for="other{{ entity.id }}">{{ entity }}</label><br>
+                    {% endfor %}
+                    <input type="text" class="hade" name="other" id="other" placeholder="Контрагенты">
+
+                    <button type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

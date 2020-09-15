@@ -57,8 +57,21 @@ class Sub(models.Model):
     def __str__(self):
         return str(self.number)
 
+
+class Worker(models.Model):
+    name = models.CharField('Имя', max_length=200, default='')
+    surname = models.CharField('Фамилия', max_length=200, default='')
+    email = models.CharField('E-mail', max_length=200, default='')
+    phone = models.CharField('Номер Телефона', max_length=200, default='')
+
+
+    def __str__(self):
+        return self.name + ' ' + self.surname
+    
+
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
+    init = models.ForeignKey(Worker, on_delete=models.CASCADE, null=True, verbose_name='Инициатор')    
     own_company = models.ForeignKey(OwnCompany, on_delete=models.CASCADE, null=True, verbose_name='Сторона 1')
     signer_one = models.CharField('Подписант 1', max_length=1, choices=signer_choice, default='1')
     side_two = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, verbose_name='Сторона 2', related_name='Side 2+')
@@ -105,6 +118,10 @@ class InMail(models.Model):
     response_to = models.ForeignKey('OutMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
     topic = models.TextField('Тема', max_length=500, null=True, blank=True)
 
+
+    class Meta:
+        unique_together = ('in_number', 'own_company',)
+
     def __str__(self):
         return str(self.own_company) + " " + str(self.side_two)
 
@@ -118,6 +135,8 @@ class OutMail(models.Model):
     response_to = models.ForeignKey('InMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
     topic = models.TextField('Тема', max_length=500, null=True, blank=True)
 
+    class Meta:
+        unique_together = ('out_number', 'own_company',)
     def __str__(self):
         return str(self.side_two) + " " + str(self.own_company)
 

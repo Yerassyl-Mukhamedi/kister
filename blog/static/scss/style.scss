@@ -75,8 +75,16 @@
             width: 50px;
         }
     }
+    input{
+        display: none;
+    }
 }
 
+.mail_search{
+    .hade{
+        display: none;
+    }
+}
 .mail_detail{
     .title{
         font-size: 20px;
