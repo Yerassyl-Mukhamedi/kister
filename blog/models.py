@@ -71,7 +71,7 @@ class Worker(models.Model):
 
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
-    init = models.ForeignKey(Worker, on_delete=models.CASCADE, null=True, verbose_name='Инициатор')    
+    init = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Инициатор', default='')    
     own_company = models.ForeignKey(OwnCompany, on_delete=models.CASCADE, null=True, verbose_name='Сторона 1')
     signer_one = models.CharField('Подписант 1', max_length=1, choices=signer_choice, default='1')
     side_two = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, verbose_name='Сторона 2', related_name='Side 2+')
