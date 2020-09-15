@@ -5,14 +5,6 @@
             {% if dogovor.status == "current" %}
                 <div class="row">
                     <div class="col-md-3">
-                        Создан
-                    </div>
-                    <div class="col-md-7">
-                        {{ dogovor.created_at }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
                         Номер договора
                     </div>
                     <div class="col-md-7">
@@ -51,14 +43,16 @@
                         {{ dogovor.side_two }}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        Контрагент 2  
+                {% if dogovor.side_three != None %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            Контрагент 2  
+                        </div>
+                        <div class="col-md-7">
+                            {{ dogovor.side_three }}
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        {{ dogovor.side_three }}
-                    </div>
-                </div>
+                {% endif %}
                 {% if dogovor.subs %}
                     <div class="row">
                         <div class="col-md-3">
