@@ -145,3 +145,19 @@ $( "#no" ).click(function() {
     $("#wrap").hide()
     $("#delete").show()
 });
+
+
+
+
+if (window.location.href.indexOf("mail_new") > -1) {
+    $('#id_in_number').prop('readonly', true);
+    $('#id_out_number').prop('readonly', true);
+}
+
+$("#id_own_company").change(function() {
+    var company_id = $("#id_own_company").val()
+    var number = parseInt($("#"+company_id+" .sec2").html())
+    // $("#id_in_number").val(8)
+    $("#id_in_number").val(number+1);
+    $("#id_out_number").val(number+1);
+})

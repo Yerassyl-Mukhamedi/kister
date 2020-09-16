@@ -125,3 +125,7 @@
 .search_list form .title {
   margin-bottom: 0;
 }
+
+.mail_new .hade {
+  display: none;
+}

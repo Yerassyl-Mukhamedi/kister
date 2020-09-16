@@ -17,4 +17,5 @@ urlpatterns = [
     path('expired_list/', views.expired_list, name='expired_list'),
     path('mail_detail/<str:status>/<int:pk>', views.mail_detail, name='mail_detail'),
     path('sub_detail/<int:pk>', views.sub_detail, name='sub_detail'),
+    path('mail_new/<str:status>', views.mail_new, name='mail_new'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

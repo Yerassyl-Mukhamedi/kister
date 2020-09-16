@@ -64,6 +64,8 @@ class Worker(models.Model):
     email = models.CharField('E-mail', max_length=200, default='')
     phone = models.CharField('Номер Телефона', max_length=200, default='')
 
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name + ' ' + self.surname
@@ -109,7 +111,8 @@ class Upload(models.Model):
 
 
 class InMail(models.Model):
-    status = models.CharField('Статус', max_length=20, default='incoming', editable=False) 
+    status = models.CharField('Статус', max_length=20, default='incoming', editable=False)
+    init = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Инициатор', default='')
     created_at = models.DateField(auto_now_add=True, null=True,)
     own_company = models.ForeignKey(OwnCompany, on_delete=models.CASCADE, null=True, verbose_name='Наши компаний')
     side_two = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, verbose_name='От кого')
@@ -118,7 +121,6 @@ class InMail(models.Model):
     response_to = models.ForeignKey('OutMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
     topic = models.TextField('Тема', max_length=500, null=True, blank=True)
 
-
     class Meta:
         unique_together = ('in_number', 'own_company',)
 
@@ -126,7 +128,8 @@ class InMail(models.Model):
         return str(self.own_company) + " " + str(self.side_two)
 
 class OutMail(models.Model):
-    status = models.CharField('Статус', max_length=20, default='outcoming', editable=False) 
+    status = models.CharField('Статус', max_length=20, default='outcoming', editable=False)
+    init = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Инициатор', default='')
     created_at = models.DateField(auto_now_add=True, null=True,)
     own_company = models.ForeignKey(OwnCompany, on_delete=models.CASCADE, null=True, verbose_name='Наши компаний')
     side_two = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, verbose_name='Кому')

@@ -215,6 +215,62 @@ def mail_detail(request, status, pk):
     }
     return render(request, 'blog/mail_detail.html', context)
 
+def mail_new(request, status):
+    context = {}
+    if(status=='in'):
+        own1 = InMail.objects.filter(own_company__name = 'Planeta doors').last()
+        own2 = InMail.objects.filter(own_company__name = 'Двери.опт').last()
+        own3 = InMail.objects.filter(own_company__name = 'Kendala IMPEX').last()
+        own4 = InMail.objects.filter(own_company__name = 'Двери.класс').last()
+        own5 = InMail.objects.filter(own_company__name = 'ИП Арынов').last()
+        own6 = InMail.objects.filter(own_company__name = 'ИП Таишев').last()
+        own7 = InMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
+        if request.method == "POST":
+            form = InMailForm(request.POST, request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.published_date = timezone.now()
+                post.save()
+                return redirect('mail_list')
+        else:
+            form = InMailForm()
+
+    
+    elif(status=='out'):
+        own1 = OutMail.objects.filter(own_company__name = 'Planeta doors').last()
+        own2 = OutMail.objects.filter(own_company__name = 'Двери.опт').last()
+        own3 = OutMail.objects.filter(own_company__name = 'Kendala IMPEX').last()
+        own4 = OutMail.objects.filter(own_company__name = 'Двери.класс').last()
+        own5 = OutMail.objects.filter(own_company__name = 'ИП Арынов').last()
+        own6 = OutMail.objects.filter(own_company__name = 'ИП Таишев').last()
+        own7 = OutMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
+        if request.method == "POST":
+            form = OutMailForm(request.POST, request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.published_date = timezone.now()
+                post.save()
+                return redirect('mail_list')
+        else:
+            form = OutMailForm()
+
+    context ={
+        'form': form,
+        'own1': own1,
+        'own2': own2,
+        'own3': own3,
+        'own4': own4,
+        'own5': own5,
+        'own6': own6,
+        'own7': own7,
+    }
+    
+
+    return render(request, 'blog/mail_new.html', context)
+
+
 
 def sub_detail(request, pk):
     sub = Sub.objects.get(id=pk)
