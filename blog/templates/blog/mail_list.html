@@ -14,7 +14,7 @@
                 </form>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-6 left">
                 <div class="row top">
@@ -57,13 +57,13 @@
                     </div>
                 </a>
                 {% endfor %}
-                
-            
+
+
             </div>
             <div class="col-md-6">
                 <div class="row top">
                     <div class="col-md-3">
-                        <div class="sub_title">Исходящие</div>                
+                        <div class="sub_title">Исходящие</div>
                     </div>
                     <div class="col-md-9">
                         <a href="{% url 'mail_new' status='out' %}"><img class="plus" src="/media/images/plus.png"></a>
@@ -100,10 +100,9 @@
                             {{ mail.created_at }}
                         </div>
                     </div>
-                </a>    
+                </a>
                 {% endfor %}
             </div>
         </div>
     </div>
 {% endblock %}
-        

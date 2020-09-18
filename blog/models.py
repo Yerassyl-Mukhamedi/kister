@@ -19,7 +19,7 @@ class OwnCompany(models.Model):
 
 
     def __str__(self):
-        return self.name 
+        return self.name
 
 
 class Entity(models.Model):
@@ -30,8 +30,12 @@ class Entity(models.Model):
     ebin2 = models.CharField('Иностранный Номер', max_length=200, blank=True)
 
 
+    class Meta:
+        ordering = ["name"]
+
+
     def __str__(self):
-        return '"' + self.name +'", ' + self.get_etype_display()
+        return self.name +', ' + self.get_etype_display()
 
 
 def file_path(instance, filename):
@@ -69,17 +73,17 @@ class Worker(models.Model):
 
     def __str__(self):
         return self.name + ' ' + self.surname
-    
+
 
 class Dogovor(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True,)
-    init = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Инициатор', default='')    
+    init = models.ForeignKey(Worker, on_delete=models.CASCADE, verbose_name='Инициатор', default='')
     own_company = models.ForeignKey(OwnCompany, on_delete=models.CASCADE, null=True, verbose_name='Сторона 1')
     signer_one = models.CharField('Подписант 1', max_length=1, choices=signer_choice, default='1')
     side_two = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, verbose_name='Сторона 2', related_name='Side 2+')
-    signer_two = models.CharField('Подписант 2', max_length=1, choices=signer_choice, default='1') 
+    signer_two = models.CharField('Подписант 2', max_length=1, choices=signer_choice, default='1')
     side_three = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Сторона 3', related_name='Side 3+')
-    signer_three = models.CharField('Подписант 3', max_length=1, choices=signer_choice, blank=True, default='1') 
+    signer_three = models.CharField('Подписант 3', max_length=1, choices=signer_choice, blank=True, default='1')
     number = models.IntegerField('Номер Договора')
     originity = models.CharField('Имеется Оригинал', max_length=1, choices=resident_choice, default='1')
     renew = models.CharField('Авто Продление', max_length=1, choices=resident_choice, default='1')
@@ -87,7 +91,7 @@ class Dogovor(models.Model):
     date_end = models.DateField('Окончание Договора', null=True)
     upload_file = models.FileField(null=True, blank=True, upload_to=file_path)
     subs = models.ForeignKey(Sub, on_delete=models.CASCADE, null=True, blank= True, verbose_name='Допника')
-    status = models.CharField('Статус', max_length=20, default='current', editable=False) 
+    status = models.CharField('Статус', max_length=20, default='current', editable=False)
     upload_file2 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file3 = models.FileField(null=True, blank=True, upload_to=file_path)
     upload_file4 = models.FileField(null=True, blank=True, upload_to=file_path)
@@ -105,7 +109,7 @@ class Dogovor(models.Model):
 
 
 class Upload(models.Model):
-    upload_file = models.FileField()    
+    upload_file = models.FileField()
     upload_date = models.DateTimeField(auto_now_add =True)
 
 
@@ -143,7 +147,7 @@ class OutMail(models.Model):
     def __str__(self):
         return str(self.side_two) + " " + str(self.own_company)
 
-    
+
 class UploadView(CreateView):
     model = Upload
     fields = ['upload_file', ]
