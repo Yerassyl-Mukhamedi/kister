@@ -84,7 +84,7 @@ class Dogovor(models.Model):
     signer_two = models.CharField('Подписант 2', max_length=1, choices=signer_choice, default='1')
     side_three = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Сторона 3', related_name='Side 3+')
     signer_three = models.CharField('Подписант 3', max_length=1, choices=signer_choice, blank=True, default='1')
-    number = models.IntegerField('Номер Договора')
+    number = models.CharField('Номер Договора', max_length=100, blank=True, default='')
     originity = models.CharField('Имеется Оригинал', max_length=1, choices=resident_choice, default='1')
     renew = models.CharField('Авто Продление', max_length=1, choices=resident_choice, default='1')
     date_start = models.DateField('Дата Договора', null=True)
@@ -123,7 +123,8 @@ class InMail(models.Model):
     in_number = models.IntegerField('Входящий Номер')
     upload_file = models.FileField(null=True, upload_to=file_path, blank=True)
     response_to = models.ForeignKey('OutMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
-    topic = models.TextField('Тема', max_length=500, null=True, blank=True)
+    topic = models.TextField('Тема', max_length=2000, null=True, blank=True)
+    state = models.CharField('Состояние', max_length=20, default='editable')
 
     class Meta:
         unique_together = ('in_number', 'own_company',)
@@ -140,7 +141,8 @@ class OutMail(models.Model):
     out_number = models.IntegerField('Исходящий Номер')
     upload_file = models.FileField(null=True, upload_to=file_path, blank=True)
     response_to = models.ForeignKey('InMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
-    topic = models.TextField('Тема', max_length=500, null=True, blank=True)
+    topic = models.TextField('Тема', max_length=2000, null=True, blank=True)
+    state = models.CharField('Состояние', max_length=20, default='editable')
 
     class Meta:
         unique_together = ('out_number', 'own_company',)

@@ -185,7 +185,7 @@ def expired_list(request):
 
 def mail_list(request):
     inmails = InMail.objects.all()
-    outmails = OutMail.objects.all()
+    outmails = OutMail.objects.all().order_by('id')
     context = {
         'inmails': inmails,
         'outmails': outmails,
@@ -214,6 +214,86 @@ def mail_detail(request, status, pk):
         'responses': responses,
     }
     return render(request, 'blog/mail_detail.html', context)
+
+
+def mail_edit(request, status, pk):
+    if(status == 'incoming'):
+        mail = InMail.objects.get(id=pk)
+        if request.method == "POST":
+            form = InMailForm(request.POST, request.FILES, instance = mail)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.published_date = timezone.now()
+                post.save()
+                return redirect('mail_list')
+        else:
+            form = InMailForm()
+        try:
+            responses = OutMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+
+        
+    elif(status == 'outcoming'):
+        mail = OutMail.objects.get(id=pk)
+        if request.method == "POST":
+            form = OutMailForm(request.POST, request.FILES, instance = mail)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.published_date = timezone.now()
+                post.save()
+                return redirect('mail_list')
+        else:
+            form = OutMailForm()
+
+        try:
+            responses = InMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+
+ 
+    context = {
+        'mail': mail,
+        'responses': responses,
+        'form': form,
+    }
+
+    return render(request, 'blog/mail_edit.html', context)
+
+
+def mail_send(request, status, pk):
+    
+    if(status=='incoming'):
+
+        InMail.objects.filter(id=pk).update(state='noneditable')
+        mail = InMail.objects.get(id=pk)
+        try:
+            responses = InMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+
+    elif(status=='outcoming'):
+        OutMail.objects.filter(id=pk).update(state='noneditable')
+        mail = OutMail.objects.get(id=pk)
+        try:
+            responses = OutMail.objects.filter(response_to_id = pk)
+        except: 
+            responses = None
+            
+    
+
+    context = {
+        'mail': mail,
+        'responses': responses,
+    }
+
+    return render(request, 'blog/mail_detail.html', context)
+
+
+
+
 
 def mail_new(request, status):
     context = {}

@@ -161,3 +161,19 @@ $("#id_own_company").change(function() {
     $("#id_in_number").val(number+1);
     $("#id_out_number").val(number+1);
 })
+
+
+if (window.location.href.indexOf("mail_edit") > -1) {
+    var company_id = $("#company_id").html()
+    var init_id = $("#init_id").html()
+    var side_two_id = $("#side_two_id").html()
+    var number = $("#number").html()
+    var text = $("#text").html()
+    $("[name*='number']").prop('readonly', true);
+    $("#id_own_company").val(company_id);
+    $("#id_init").val(init_id);
+    $("#id_side_two").val(side_two_id);
+    $("#id_topic").val(text);
+    $("[name*='number']").val(number)
+
+}

@@ -137,3 +137,19 @@
         display: none;
     }
 }
+
+.mail_edit{
+    form{
+        p:nth-child(2){
+            display: none;
+        }
+    }
+    .visible{
+        span{
+            font-weight: bold;
+        }
+    }
+    .hade{
+        display: none;
+    }
+}

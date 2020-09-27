@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="mail_edit">
+        {% if mail %}
+            <div class="hade" id="company_id">{{ mail.own_company.id }}</div>
+            <div class="hade" id="init_id">{{ mail.init.id }}</div>
+            <div class="hade" id="side_two_id">{{ mail.side_two.id }}</div>
+            <div class="hade" id="text">{{ mail.topic }}</div>
+            {% if mail.status == 'incoming' %}
+                <div class="hade" id="number">{{ mail.in_number }}</div>
+                <div class="visible"> <span>Кому:</span> {{ mail.own_company }}</div>  
+            {% else %}
+                <div class="hade" id="number">{{ mail.out_number }}</div>
+                <div class="visible"> <span>От кого:</span> {{ mail.own_company }}</div>                
+            {% endif %}
+            
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form><hr>
+    </div>
+{% endblock %}
