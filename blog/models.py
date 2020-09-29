@@ -123,8 +123,9 @@ class InMail(models.Model):
     in_number = models.IntegerField('Входящий Номер')
     upload_file = models.FileField(null=True, upload_to=file_path, blank=True)
     response_to = models.ForeignKey('OutMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
-    topic = models.TextField('Тема', max_length=2000, null=True, blank=True)
+    topic = models.TextField('Тема', max_length=20000, null=True, blank=True)
     state = models.CharField('Состояние', max_length=20, default='editable')
+    track_number = models.FileField(null=True, upload_to=file_path, blank=True)
 
     class Meta:
         unique_together = ('in_number', 'own_company',)
@@ -141,8 +142,9 @@ class OutMail(models.Model):
     out_number = models.IntegerField('Исходящий Номер')
     upload_file = models.FileField(null=True, upload_to=file_path, blank=True)
     response_to = models.ForeignKey('InMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
-    topic = models.TextField('Тема', max_length=2000, null=True, blank=True)
+    topic = models.TextField('Тема', max_length=20000, null=True, blank=True)
     state = models.CharField('Состояние', max_length=20, default='editable')
+    track_number = models.FileField(null=True, upload_to=file_path, blank=True)
 
     class Meta:
         unique_together = ('out_number', 'own_company',)

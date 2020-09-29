@@ -17,6 +17,9 @@
                 Письмо является ответом на: <a href="{% url 'mail_detail' status=mail.response_to.status pk=mail.response_to.id %}">{{ mail.response_to }}</a> <br>
             {% endif %}
 
+            {% if mail.track_number %}
+            Track Number:  <a href="{{ mail.track_number.url }}">Track Number</a> <br>
+            {% endif %}
             {% if mail.state == 'editable' %}
                 Можно редактировать
                 <a href="{% url 'mail_edit' status=mail.status pk=mail.id %}">Change</a> <br>
@@ -37,6 +40,9 @@
             {% endif %}
             {% if mail.response_to != None %}
                 Письмо является ответом на: <a href="{% url 'mail_detail' status=mail.response_to.status pk=mail.response_to.id %}">{{ mail.response_to }}</a> <br>
+            {% endif %}
+            {% if mail.track_number %}
+                Track Number:  <a href="{{ mail.track_number.url }}">Track Number</a> <br>
             {% endif %}
             {% if mail.state == 'editable' %}
                 Можно редактировать
