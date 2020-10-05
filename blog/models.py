@@ -15,7 +15,7 @@ import os, random
 
 class OwnCompany(models.Model):
     name = models.CharField('Название Юр. Лица', max_length=200)
-    ebin = models.CharField('БИН РК', max_length=12, blank=True)
+    ebin = models.CharField('БИН РК', max_length=14, blank=True)
 
 
     def __str__(self):
