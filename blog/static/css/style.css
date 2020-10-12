@@ -141,3 +141,42 @@
 .mail_edit .hade {
   display: none;
 }
+
+.pdf .logo {
+  height: 170px;
+  font-size: 64px;
+  text-align: center;
+}
+
+.pdf .logo img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.pdf .title {
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.pdf p {
+  margin-bottom: 40px;
+}
+
+.pdf .sign {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pdf .info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.pdf .info span {
+  font-size: 12px;
+}

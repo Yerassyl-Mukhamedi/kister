@@ -4,9 +4,19 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.db.models import Q 
 from django.shortcuts import redirect
+
+# from django.http import HttpResponse
+# from django.views.generic import View
+
+# from .utils import * #created in step 4
+
+# from django import template
+# from django.template.loader import get_template 
+
+from datetime import datetime
+
 from .models import *
 from .forms import *
-
 
 def dogovor_new(request):
     return render(request, 'blog/dogovor_new.html', {})
@@ -361,3 +371,22 @@ def sub_detail(request, pk):
     }
     return render(request, 'blog/sub_detail.html', context)
 
+
+
+
+
+
+
+def some_view(request, pk, status):
+    
+    mail = OutMail.objects.get(id=pk)
+    context = {
+        "invoice_id": 123,
+        "customer_name": "John Cooper",
+        "amount": 1399.99,
+        "today": "Today",
+        'mail': mail,
+        'time': datetime.now()
+    }
+
+    return render(request, 'blog/mail_pdf.html', context)

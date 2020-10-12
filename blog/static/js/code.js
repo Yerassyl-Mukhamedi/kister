@@ -177,3 +177,8 @@ if (window.location.href.indexOf("mail_edit") > -1) {
     $("[name*='number']").val(number)
 
 }
+
+
+if (window.location.href.indexOf("some_view") > -1) {
+    $(".header").hide()
+}

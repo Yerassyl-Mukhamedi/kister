@@ -20,4 +20,5 @@ urlpatterns = [
     path('mail_send/<str:status>/<int:pk>', views.mail_send, name='mail_send'),
     path('mail_new/<str:status>', views.mail_new, name='mail_new'),
     path('sub_detail/<int:pk>', views.sub_detail, name='sub_detail'),
+    path('some_view/<int:pk>/<str:status>', views.some_view, name='some_view'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

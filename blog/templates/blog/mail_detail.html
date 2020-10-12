@@ -51,6 +51,7 @@
             {% else %}
                 Редактировать запрещено
             {% endif %}
+            <a href="{% url 'some_view' pk=mail.pk status=mail.status %}">Сформировать сопроводительное письмо</a>
         {% endif %}
 
         {% for response in responses %}

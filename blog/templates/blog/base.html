@@ -9,12 +9,12 @@
             <link rel="stylesheet" href="/static/css/style.css">
         </head>
         <body>
-            {{ user.get_username }}
             {% if user.get_username == 'Law' or user.is_superuser %}
                 <div class="container header">
                     <a href="{% url 'company_list' %}"><div>Список Компаний</div></a>
                     <a href="{% url 'mail_list' %}"><div>Список Писем</div></a>
                     <a href="{% url 'expired_list' %}"><div>Просроченные</div></a>
+                    {{ user.get_username }}
                 </div>
             {% endif %}
             <div class="container">

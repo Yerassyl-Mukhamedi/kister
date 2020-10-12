@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% if mail %}
+        <div class="pdf">
+            <div class="logo">
+                {% if mail.own_company.name == 'Planeta doors' %}
+                    <img src="/media/images/logo.png">          
+                {% elif mail.own_company.name == 'ИП Арынов' %}
+                    ИП Арынов
+                {% elif mail.own_company.name == 'Двери.опт' %}
+                    Двери.опт
+                {% elif mail.own_company.name == 'Двери.класс' %}
+                    Двери.класс
+                {% elif mail.own_company.name == 'ТОО Beltaus' %}
+                    ТОО Beltaus
+                {% elif mail.own_company.name == 'ИП Таишев' %}
+                    ИП Таишев
+                {% elif mail.own_company.name == 'Kendala IMPEX' %}
+                    Kendala IMPEX
+                {% endif %}
+            </div>
+            <div class="info">
+                <div>Исходящий номер <strong>{{ mail.out_number }}</strong> <br> {{ mail.side_two }} </div>
+                <div> <strong>Алматы</strong>  <br>
+                   <span>
+                        {% if time %}
+                            {{ time| date:"d M Y" }} г.
+                        {% endif %}
+                    </span> 
+                </div>
+            </div>
+            <div class="title">Сопроводительное письмо</div>
+            <p>{{ mail.topic }}</p>
+            <div class="sign">
+                <div>Место печати</div>
+                <div>Исполнитель <br> Офис Менеджер <br> <strong> Рахатова Айгерим</strong> <br> <br> Подпись_____________</div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
