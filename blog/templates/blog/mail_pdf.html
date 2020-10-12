@@ -20,8 +20,9 @@
                 {% endif %}
             </div>
             <div class="info">
-                <div>Исходящий# <strong>{{ mail.out_number }}</strong> <br> {{ mail.side_two }} </div>
-                <div> г. <strong>Алматы</strong>  <br>
+                <div>Исходящий № <strong>{{ mail.out_number }}</strong> <br>  </div>
+                <div>{{ mail.side_two }} <br>
+                     г. <strong>Алматы</strong>  <br>
                    <span>
                         {% if time %}
                             {{ time| date:"d M Y" }} год
