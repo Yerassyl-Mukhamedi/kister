@@ -144,6 +144,7 @@ class OutMail(models.Model):
     response_to = models.ForeignKey('InMail', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Ответ на письмо')
     topic = models.TextField('Тема', max_length=20000, null=True, blank=True)
     state = models.CharField('Состояние', max_length=20, default='editable')
+    track = models.CharField('Номер Трэка', max_length=20, default='', null=True, blank=True)    
     track_number = models.FileField(null=True, upload_to=file_path, blank=True)
 
     class Meta:

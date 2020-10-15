@@ -10,5 +10,5 @@ class InMailForm(forms.ModelForm):
 class OutMailForm(forms.ModelForm):
     class Meta:
         model = OutMail
-        fields = ('own_company','init','side_two', 'out_number' , 'upload_file', 'response_to', 'topic', 'track_number')
+        fields = ('own_company','init','side_two', 'out_number' , 'upload_file', 'response_to', 'topic', 'track','track_number')
 

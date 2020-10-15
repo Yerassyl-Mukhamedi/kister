@@ -180,3 +180,7 @@
 .pdf .info span {
   font-size: 12px;
 }
+
+.pdf #topic {
+  padding: 0 100px;
+}

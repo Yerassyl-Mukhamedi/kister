@@ -179,6 +179,60 @@ if (window.location.href.indexOf("mail_edit") > -1) {
 }
 
 
+
+if (window.location.href.indexOf("mail_detail") > -1) {
+    let dok = document.getElementById('topic').innerHTML;
+    const array = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    let list = []
+    let counter = 0;
+    let b = '<br>' 
+    for(i=0;i<dok.length;i++){
+        if(dok[i]=='.' && array.includes(dok[i-1])){
+            // list.push(i-2)
+            if(!array.includes(dok[i-2])){
+                dok = [dok.slice(0, i-1), b , dok.slice(i-1)].join('');
+                i = i + 5
+            }
+            else{
+                dok = [dok.slice(0, i-2), b , dok.slice(i-2)].join('');
+                i = i + 5
+            }
+        }
+    }
+    // for(i=1; i<list.length+1; i++){
+    //     dok = [dok.slice(0, list[i]+(2*i)), b , dok.slice(list[i]+(4*i))].join('');
+    // }
+    console.log(dok)
+    document.getElementById('topic').innerHTML = dok;
+    // console.log(list)
+    // console.log(dok[97])
+}
 if (window.location.href.indexOf("some_view") > -1) {
     $(".header").hide()
+
+    let dok = document.getElementById('topic').innerHTML;
+    const array = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    let list = []
+    let counter = 0;
+    let b = '<br>' 
+    for(i=0;i<dok.length;i++){
+        if(dok[i]=='.' && array.includes(dok[i-1])){
+            // list.push(i-2)
+            if(!array.includes(dok[i-2])){
+                dok = [dok.slice(0, i-1), b , dok.slice(i-1)].join('');
+                i = i + 5
+            }
+            else{
+                dok = [dok.slice(0, i-2), b , dok.slice(i-2)].join('');
+                i = i + 5
+            }
+        }
+    }
+    // for(i=1; i<list.length+1; i++){
+    //     dok = [dok.slice(0, list[i]+(2*i)), b , dok.slice(list[i]+(4*i))].join('');
+    // }
+    console.log(dok)
+    document.getElementById('topic').innerHTML = dok;
+    // console.log(list)
+    // console.log(dok[97])
 }

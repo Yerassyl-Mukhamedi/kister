@@ -20,7 +20,9 @@
                 {% endif %}
             </div>
             <div class="info">
-                <div>Исходящий № <strong>{{ mail.out_number }}</strong> <br>  </div>
+                <div>Исходящий № <strong>{{ mail.out_number }}</strong> <br> 
+                    Номер отслеживания <strong>{{ mail.track }}</strong>
+                </div>
                 <div>{{ mail.side_two }} <br>
                      г. <strong>Алматы</strong>  <br>
                    <span>
@@ -31,7 +33,7 @@
                 </div>
             </div>
             <div class="title">Сопроводительное письмо</div>
-            <p>{{ mail.topic }}</p>
+            <p id="topic">{{ mail.topic }}</p>
             <div class="sign">
                 <div>Место печати</div>
                 <div>Исполнитель <br> Офис Менеджер <br> <strong> Рахатова Айгерим</strong> <br> <br> Подпись_____________</div>
