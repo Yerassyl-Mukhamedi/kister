@@ -11,7 +11,8 @@
                 <div class="visible"> <span>Кому:</span> {{ mail.own_company }}</div>  
             {% else %}
                 <div class="hade" id="number">{{ mail.out_number }}</div>
-                <div class="visible"> <span>От кого:</span> {{ mail.own_company }}</div>                
+                <div class="visible"> <span>От кого:</span> {{ mail.own_company }}</div>
+                <div class="hade" id="track">{{ mail.track }}</div>          
             {% endif %}
             
         {% endif %}
