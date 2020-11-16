@@ -96,13 +96,22 @@ def delete_list(request):
     return render(request, 'blog/delete_list.html', context)
 
 
-def check_list(target, order, model):
+def check_list(klit, target, order, model):
     counter = model.objects.all().count()
-
-    if len(target) > 0:    
-        for i in target:
-            if i != ",":
-                order.append(int(i))
+    dlina = len(target)
+    
+    def recursion(number):
+        if(',' in target):
+            comma = target.count(',')
+            for i in range(comma+1):
+                san = target.split(',')[i]
+                order.append(int(san))
+                klit.append(comma)
+        else:
+            order.append(int(target))
+    
+    if dlina > 0:    
+        recursion(1)
     else:
         for j in range(counter):
             order.append(j+1)
@@ -118,7 +127,7 @@ def search_list(request):
     own_ids = []
     other_ids = []
     init_ids = []
-
+    klits = []
 
     if(len(original)<1):
         original_ids = [1,2]
@@ -130,23 +139,25 @@ def search_list(request):
     else: 
         auto_ids = auto
     
-    check_list(own, own_ids, OwnCompany)
-    check_list(other, other_ids, Entity)
-    check_list(init, init_ids, Worker)
+    check_list(klits, own, own_ids, OwnCompany)
+    check_list(klits, other, other_ids, Entity)
+    check_list(klits, init, init_ids, Worker)
 
     entitys = Entity.objects.all()
     inits = Worker.objects.all()
     companys = OwnCompany.objects.all()
-    dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(init_id__in = init_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
+    # dogovors = Dogovor.objects.filter(own_company_id__in = own_ids).filter(init_id__in = init_ids).filter(side_two_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
     dogovors_two = Dogovor.objects.filter(own_company_id__in = own_ids).filter(init_id__in = init_ids).filter(side_three_id__in = other_ids).filter(originity__in = original_ids).filter(renew__in = auto_ids).filter(date_start__range=[date_start, date_end]).order_by('id')
     # dogovors = Dogovor.objects
-    
+    dogovors = Dogovor.objects.filter(side_two_id__in = other_ids)
     context = {
         'dogovors': dogovors,
         'entitys': entitys,
         'inits': inits,
         'companys': companys,
         'dogovors_two': dogovors_two,
+        'companys': companys,
+        'klits': klits,
     }
 
 

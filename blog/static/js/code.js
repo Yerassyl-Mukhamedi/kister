@@ -62,7 +62,7 @@ $(".all").change(function() {
     }
     
     if(this.checked) {
-        if(this.id.includes('0')){        
+        if(this.value == '0'){        
             $("." + this.classList[1]).prop("checked", true);
             list = []
             for(var i=1; i<count; i++){
@@ -90,7 +90,7 @@ $(".all").change(function() {
         }
     }
     else{
-        if(this.id.includes('0')){
+        if(this.value == '0'){
             $( "." + this.classList[1] ).prop("checked", false);
             list = []
         }

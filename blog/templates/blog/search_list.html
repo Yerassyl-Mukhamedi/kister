@@ -17,6 +17,7 @@
                 <a href="{%url 'dogovor_detail' pk=dogovor.own_company.id pk_alt=dogovor.side_two.id pk_altos=dogovor.id %}">
                     <div class="row line">
                         <div class="col-md-1">{{ dogovor.number }}</div>
+                        <div class="col-md-1">{{ dogovor.number }}</div>
                         <div class="col-md-2">{{ dogovor.own_company }}</div>
                         <div class="col-md-3">{{ dogovor.side_two }}</div>
                         <div class="col-md-2">{{ dogovor.date_start|date:'d-m-Y' }}</div>
@@ -58,11 +59,11 @@
                     <div class="title">Контрагенты</div>
                     <input class="all other" type="checkbox" value=0 id="other0">
                     <label for="other_all">Все</label><br>
+                    <input type="text" class="hade" name="other" id="other" placeholder="Контрагенты">
                 {% for entity in entitys %}
                     <input class="all other" type="checkbox" id="other{{entity.id}}" value={{ entity.id }}>
                     <label for="other{{ entity.id }}">{{ entity }}</label><br>
                 {% endfor %}
-                    <input type="text" class="hade" name="other" id="other" placeholder="Контрагенты">
 
                     
                     <div class="title">Инициатор</div>
