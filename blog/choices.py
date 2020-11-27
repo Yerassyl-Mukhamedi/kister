@@ -17,6 +17,7 @@ own_companies = (
     ('4', 'Двери Опт'),
     ('5', 'Двери Класс'),
     ('6', 'Beltaus'),
+    ('7', 'Kendala Logistics'),
 )
 
 signer_choice = (
