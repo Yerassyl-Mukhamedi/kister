@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.db.models import Q 
+from django.db.models import Q
 from django.shortcuts import redirect
 
 # from django.http import HttpResponse
@@ -11,7 +11,7 @@ from django.shortcuts import redirect
 # from .utils import * #created in step 4
 
 # from django import template
-# from django.template.loader import get_template 
+# from django.template.loader import get_template
 
 from datetime import datetime
 
@@ -57,7 +57,7 @@ def dogovor_detail(request, pk, pk_alt, pk_altos):
     }
     return render(request, 'blog/dogovor_detail.html', context)
 
-    
+
 def dogovor_delete(request, pk, pk_alt, pk_altos):
     dogovor = Dogovor.objects.filter(id=pk)
     dogovor.update(status='trash')
@@ -73,7 +73,7 @@ def dogovor_delete(request, pk, pk_alt, pk_altos):
     return render(request, 'blog/dogovor_list.html', context)
 
 
-    
+
 
 def entity_list(request, pk):
     dogovors = Dogovor.objects.filter(own_company_id = pk).filter(status='current')
@@ -99,7 +99,7 @@ def delete_list(request):
 def check_list(klit, target, order, model):
     counter = model.objects.all().count()
     dlina = len(target)
-    
+
     def recursion(number):
         if(',' in target):
             comma = target.count(',')
@@ -109,8 +109,8 @@ def check_list(klit, target, order, model):
                 klit.append(comma)
         else:
             order.append(int(target))
-    
-    if dlina > 0:    
+
+    if dlina > 0:
         recursion(1)
     else:
         for j in range(counter):
@@ -131,14 +131,14 @@ def search_list(request):
 
     if(len(original)<1):
         original_ids = [1,2]
-    else: 
+    else:
         original_ids = original
 
     if(len(auto)<1):
         auto_ids = [1,2]
-    else: 
+    else:
         auto_ids = auto
-    
+
     check_list(klits, own, own_ids, OwnCompany)
     check_list(klits, other, other_ids, Entity)
     check_list(klits, init, init_ids, Worker)
@@ -195,9 +195,9 @@ def expired_list(request):
             spisok.append(dog.id)
 
     dogovors = Dogovor.objects.filter(id__in = spisok)
-    
 
-        
+
+
     context = {
         'dogovors': dogovors
     }
@@ -220,13 +220,13 @@ def mail_detail(request, status, pk):
         mail = InMail.objects.get(id=pk)
         try:
             responses = OutMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
     elif(status == 'outcoming'):
         mail = OutMail.objects.get(id=pk)
         try:
             responses = InMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
 
 
@@ -252,10 +252,10 @@ def mail_edit(request, status, pk):
             form = InMailForm()
         try:
             responses = OutMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
 
-        
+
     elif(status == 'outcoming'):
         mail = OutMail.objects.get(id=pk)
         if request.method == "POST":
@@ -271,10 +271,10 @@ def mail_edit(request, status, pk):
 
         try:
             responses = InMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
 
- 
+
     context = {
         'mail': mail,
         'responses': responses,
@@ -285,14 +285,14 @@ def mail_edit(request, status, pk):
 
 
 def mail_send(request, status, pk):
-    
+
     if(status=='incoming'):
 
         InMail.objects.filter(id=pk).update(state='noneditable')
         mail = InMail.objects.get(id=pk)
         try:
             responses = InMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
 
     elif(status=='outcoming'):
@@ -300,10 +300,10 @@ def mail_send(request, status, pk):
         mail = OutMail.objects.get(id=pk)
         try:
             responses = OutMail.objects.filter(response_to_id = pk)
-        except: 
+        except:
             responses = None
-            
-    
+
+
 
     context = {
         'mail': mail,
@@ -326,6 +326,8 @@ def mail_new(request, status):
         own5 = InMail.objects.filter(own_company__name = 'ИП Арынов').last()
         own6 = InMail.objects.filter(own_company__name = 'ИП Таишев').last()
         own7 = InMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
+        own8 = InMail.objects.filter(own_company__name = 'Kendala KG').last()
+        own9 = InMail.objects.filter(own_company__name = 'Kendala Logistics').last()
         if request.method == "POST":
             form = InMailForm(request.POST, request.FILES)
             if form.is_valid():
@@ -337,7 +339,7 @@ def mail_new(request, status):
         else:
             form = InMailForm()
 
-    
+
     elif(status=='out'):
         own1 = OutMail.objects.filter(own_company__name = 'Planeta doors').last()
         own2 = OutMail.objects.filter(own_company__name = 'Двери.опт').last()
@@ -346,6 +348,8 @@ def mail_new(request, status):
         own5 = OutMail.objects.filter(own_company__name = 'ИП Арынов').last()
         own6 = OutMail.objects.filter(own_company__name = 'ИП Таишев').last()
         own7 = OutMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
+        own8 = OutMail.objects.filter(own_company__name = 'Kendala KG').last()
+        own9 = OutMail.objects.filter(own_company__name = 'Kendala Logistics').last()
         if request.method == "POST":
             form = OutMailForm(request.POST, request.FILES)
             if form.is_valid():
@@ -366,8 +370,10 @@ def mail_new(request, status):
         'own5': own5,
         'own6': own6,
         'own7': own7,
+        'own8': own8,
+        'own9': own9,
     }
-    
+
 
     return render(request, 'blog/mail_new.html', context)
 
@@ -389,7 +395,7 @@ def sub_detail(request, pk):
 
 
 def some_view(request, pk, status):
-    
+
     mail = OutMail.objects.get(id=pk)
     context = {
         "invoice_id": 123,

@@ -1,91 +1,117 @@
 {% extends 'blog/base.html' %}
 {% block content %}
     <div class="mail_new">
-        <div class="hade">
+        <div class="had">
             {% if own1.status == 'incoming' %}
                 {% if own1 %}
                     <div id="{{ own1.own_company.id }}">
-                        <div class="sec1">{{ own1.own_company }}</div>        
+                        <div class="sec1">{{ own1.own_company }}</div>
                         <div class="sec2">{{ own1.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own2 %}
                     <div id="{{ own2.own_company.id }}">
-                        <div class="sec1">{{ own2.own_company }}</div>        
+                        <div class="sec1">{{ own2.own_company }}</div>
                         <div class="sec2">{{ own2.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own3 %}
                     <div id="{{ own3.own_company.id }}">
-                        <div class="sec1">{{ own3.own_company }}</div>        
+                        <div class="sec1">{{ own3.own_company }}</div>
                         <div class="sec2">{{ own3.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own4 %}
                     <div id="{{ own4.own_company.id }}">
-                        <div class="sec1">{{ own4.own_company }}</div>        
+                        <div class="sec1">{{ own4.own_company }}</div>
                         <div class="sec2">{{ own4.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own5 %}
                     <div id="{{ own5.own_company.id }}">
-                        <div class="sec1">{{ own5.own_company }}</div>        
+                        <div class="sec1">{{ own5.own_company }}</div>
                         <div class="sec2">{{ own5.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own6 %}
                     <div id="{{ own6.own_company.id }}">
-                        <div class="sec1">{{ own6.own_company }}</div>        
+                        <div class="sec1">{{ own6.own_company }}</div>
                         <div class="sec2">{{ own6.in_number }}</div>
                     </div>
                 {% endif %}
                 {% if own7 %}
                     <div id="{{ own7.own_company.id }}">
-                        <div class="sec1">{{ own7.own_company }}</div>        
+                        <div class="sec1">{{ own7.own_company }}</div>
                         <div class="sec2">{{ own7.in_number }}</div>
+                    </div>
+                {% endif %}
+                {% if own8 %}
+                    <div id="{{ own8.own_company.id }}">
+                        <div class="sec1">{{ own8.own_company }}</div>
+                        <div class="sec2">{{ own8.in_number }}</div>
+                    </div>
+                {% endif %}
+
+                {% if own9 %}
+                    <div id="{{ own9.own_company.id }}">
+                        <div class="sec1">{{ own9.own_company }}</div>
+                        <div class="sec2">{{ own9.in_number }}</div>
                     </div>
                 {% endif %}
             {% elif own1.status == 'outcoming' %}
                 {% if own1 %}
                     <div id="{{ own1.own_company.id }}">
-                        <div class="sec1">{{ own1.own_company }}</div>        
+                        <div class="sec1">{{ own1.own_company }}</div>
                         <div class="sec2">{{ own1.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own2 %}
                     <div id="{{ own2.own_company.id }}">
-                        <div class="sec1">{{ own2.own_company }}</div>        
+                        <div class="sec1">{{ own2.own_company }}</div>
                         <div class="sec2">{{ own2.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own3 %}
                     <div id="{{ own3.own_company.id }}">
-                        <div class="sec1">{{ own3.own_company }}</div>        
+                        <div class="sec1">{{ own3.own_company }}</div>
                         <div class="sec2">{{ own3.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own4 %}
                     <div id="{{ own4.own_company.id }}">
-                        <div class="sec1">{{ own4.own_company }}</div>        
+                        <div class="sec1">{{ own4.own_company }}</div>
                         <div class="sec2">{{ own4.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own5 %}
                     <div id="{{ own5.own_company.id }}">
-                        <div class="sec1">{{ own5.own_company }}</div>        
+                        <div class="sec1">{{ own5.own_company }}</div>
                         <div class="sec2">{{ own5.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own6 %}
                     <div id="{{ own6.own_company.id }}">
-                        <div class="sec1">{{ own6.own_company }}</div>        
+                        <div class="sec1">{{ own6.own_company }}</div>
                         <div class="sec2">{{ own6.out_number }}</div>
                     </div>
                 {% endif %}
                 {% if own7 %}
                     <div id="{{ own7.own_company.id }}">
-                        <div class="sec1">{{ own7.own_company }}</div>        
+                        <div class="sec1">{{ own7.own_company }}</div>
                         <div class="sec2">{{ own7.out_number }}</div>
+                    </div>
+                {% endif %}
+                {% if own8 %}
+                    <div id="{{ own8.own_company.id }}">
+                        <div class="sec1">{{ own8.own_company }}</div>
+                        <div class="sec2">{{ own8.out_number }}</div>
+                    </div>
+                {% endif %}
+
+                {% if own9 %}
+                    <div id="{{ own9.own_company.id }}">
+                        <div class="sec1">{{ own9.own_company }}</div>
+                        <div class="sec2">{{ own9.out_number }}</div>
                     </div>
                 {% endif %}
             {% endif %}
