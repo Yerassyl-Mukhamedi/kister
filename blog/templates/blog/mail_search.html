@@ -9,15 +9,20 @@
                     <div class="col-md-3">Контрагент</div>
                 </div>
                 {% for mail in mails %}
-                <div class="row">
-                    <div class="col-md-1">{{mail.in_number}}</div>
-                    <div class="col-md-3">{{mail.own_company}}</div>
-                    <div class="col-md-3">{{mail.side_two.name}}</div>
-                </div>
+                <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                    <div class="row">
+                        <div class="col-md-1">{{mail.out_number}}</div>
+                        <div class="col-md-3">{{mail.own_company}}</div>
+                        <div class="col-md-3">{{mail.side_two.name}}</div>
+                    </div>
+                </a>
                 {% endfor %}
             </div>
             <div class="col-md-3">
                 <form action="{% url 'mail_search' %}" method="get">
+                    <div class="title">Номер Трэка</div>
+                    <input type="text"  name="track_number" id="track_number" placeholder="track_number">
+
                     <div class="title">Наши компаний</div>
                     <input class="all own" type="checkbox" value=0 id="own0">
                     <label for="own_all">Все</label><br>

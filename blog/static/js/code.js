@@ -65,7 +65,7 @@ $(".all").change(function() {
         if(this.value == '0'){        
             $("." + this.classList[1]).prop("checked", true);
             list = []
-            for(var i=1; i<count; i++){
+            for(var i=1; i<count+10; i++){
                 list.push(i)        
             }
         }

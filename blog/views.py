@@ -113,7 +113,7 @@ def check_list(klit, target, order, model):
     if dlina > 0:
         recursion(1)
     else:
-        for j in range(counter):
+        for j in range(counter+10):
             order.append(j+1)
 
 def search_list(request):
@@ -170,14 +170,23 @@ def mail_search(request):
     other = request.GET.get('other')
     own_ids = []
     other_ids = []
-
+    klits = []
     entitys = Entity.objects.all()
     inits = Worker.objects.all()
     companys = OwnCompany.objects.all()
-    check_list(own, own_ids, OwnCompany)
-    check_list(other, other_ids, Entity)
 
-    mails = InMail.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids)
+    check_list(klits, own, own_ids, OwnCompany)
+    check_list(klits, other, other_ids, Entity)
+
+    if(request.GET.get('track_number') != None):
+        track_number = request.GET.get('track_number')
+    else:
+        track_number = ''
+
+
+
+    mails = OutMail.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(track__contains = track_number)
+
     context = {
         'mails': mails,
         'entitys': entitys,
