@@ -32,10 +32,11 @@ class Entity(models.Model):
 
     class Meta:
         ordering = ["name"]
+        unique_together = ('ebin', 'ebin2',)
 
 
     def __str__(self):
-        return self.name +', ' + self.get_etype_display()
+        return self.name +', ' + self.get_etype_display()+ " ---     " + str(self.id)
 
 
 def file_path(instance, filename):
@@ -104,7 +105,7 @@ class Dogovor(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.number)
+        return str(self.number) + 'here'
 
 
 
@@ -131,7 +132,7 @@ class InMail(models.Model):
         unique_together = ('in_number', 'own_company',)
 
     def __str__(self):
-        return str(self.own_company) + " " + str(self.side_two)
+        return str(self.own_company) + " " + str(self.side_two) 
 
 class OutMail(models.Model):
     status = models.CharField('Статус', max_length=20, default='outcoming', editable=False)

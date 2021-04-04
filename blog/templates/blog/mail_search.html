@@ -8,12 +8,24 @@
                     <div class="col-md-3">Наша компания</div>
                     <div class="col-md-3">Контрагент</div>
                 </div>
+                Out Mails
                 {% for mail in mails %}
                 <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
                     <div class="row">
                         <div class="col-md-1">{{mail.out_number}}</div>
                         <div class="col-md-3">{{mail.own_company}}</div>
                         <div class="col-md-3">{{mail.side_two.name}}</div>
+                    </div>
+                </a>
+                {% endfor %}
+
+                In Mails
+                {% for mail2 in mails2 %}
+                <a href="{% url 'mail_detail' status=mail2.status pk=mail2.id %}">
+                    <div class="row">
+                        <div class="col-md-1">{{mail2.in_number}}</div>
+                        <div class="col-md-3">{{mail2.own_company}}</div>
+                        <div class="col-md-3">{{mail2.side_two.name}}</div>
                     </div>
                 </a>
                 {% endfor %}

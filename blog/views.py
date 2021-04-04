@@ -186,9 +186,11 @@ def mail_search(request):
 
 
     mails = OutMail.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids).filter(track__contains = track_number)
+    mails2 = InMail.objects.filter(own_company_id__in = own_ids).filter(side_two_id__in = other_ids)
 
     context = {
         'mails': mails,
+        'mails2': mails2,
         'entitys': entitys,
         'inits': inits,
         'companys': companys,
