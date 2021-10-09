@@ -16,6 +16,7 @@ import os, random
 class OwnCompany(models.Model):
     name = models.CharField('Название Юр.  Лица', max_length=200)
     ebin = models.CharField('БИН РК', max_length=14, blank=True)
+    adress = models.CharField('Адрес', max_length=200, blank=True)
 
 
     def __str__(self):

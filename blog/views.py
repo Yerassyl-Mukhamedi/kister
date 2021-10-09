@@ -216,8 +216,8 @@ def expired_list(request):
 
 
 def mail_list(request):
-    inmails = InMail.objects.all()
-    outmails = OutMail.objects.all().order_by('id')
+    inmails = InMail.objects.all().order_by('-id')
+    outmails = OutMail.objects.all().order_by('-id')
     context = {
         'inmails': inmails,
         'outmails': outmails,

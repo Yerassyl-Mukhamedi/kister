@@ -19,12 +19,13 @@
                     Kendala IMPEX
                 {% endif %}
             </div>
+            
+            <div class="ebin">БИН: {{ mail.own_company.ebin }}, Адрес: {{ mail.own_company.adress }}</div>
             <div class="info">
                 <div>Исходящий № <strong>{{ mail.out_number }}</strong> <br> 
                     Номер отслеживания <strong>{{ mail.track }}</strong>
                 </div>
-                <div>{{ mail.side_two }} <br>
-                     г. <strong>Алматы</strong>  <br>
+                <div> {{ mail.side_two.get_etype_display }} {{ mail.side_two.name  }}<br>
                    <span>
                         {% if time %}
                             {{ time| date:"d M Y" }} год
@@ -36,7 +37,7 @@
             <p id="topic">{{ mail.topic }}</p>
             <div class="sign">
                 <div>Место печати</div>
-                <div>Исполнитель <br> Офис Менеджер <br> <strong> Рахатова Айгерим</strong> <br> <br> Подпись_____________</div>
+                <div>Исполнитель <br> Офис Менеджер <br> <strong> Амирханова Дария </strong> <br> <br> Подпись_____________</div>
             </div>
         </div>
     {% endif %}
