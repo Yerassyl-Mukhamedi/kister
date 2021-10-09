@@ -28,12 +28,8 @@ class Entity(models.Model):
     side_one = models.CharField('Резидент РК', max_length=1, choices=resident_choice, default='1')
     ebin = models.CharField('БИН РК', max_length=12, blank=True)
     etype = models.CharField('Тип организаций', max_length=1, choices=entity_type)
+    adress = models.CharField('Адрес', max_length=200, blank=True)
     ebin2 = models.CharField('Иностранный Номер', max_length=200, blank=True)
-
-
-    class Meta:
-        ordering = ["name"]
-        unique_together = ('ebin', 'ebin2',)
 
 
     def __str__(self):

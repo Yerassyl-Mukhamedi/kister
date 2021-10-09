@@ -408,13 +408,17 @@ def sub_detail(request, pk):
 def some_view(request, pk, status):
 
     mail = OutMail.objects.get(id=pk)
+    nums = Entity.objects.all()
+    counter = Entity.objects.all().count()
     context = {
         "invoice_id": 123,
         "customer_name": "John Cooper",
         "amount": 1399.99,
         "today": "Today",
         'mail': mail,
-        'time': datetime.now()
+        'time': datetime.now(),
+        'nums':nums,
+        'counter':counter
     }
 
     return render(request, 'blog/mail_pdf.html', context)

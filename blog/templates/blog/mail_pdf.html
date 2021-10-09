@@ -26,6 +26,7 @@
                     Номер отслеживания <strong>{{ mail.track }}</strong>
                 </div>
                 <div> {{ mail.side_two.get_etype_display }} {{ mail.side_two.name  }}<br>
+                    {{ mail.side_two.adress }} <br>
                    <span>
                         {% if time %}
                             {{ time| date:"d M Y" }} год
@@ -40,5 +41,20 @@
                 <div>Исполнитель <br> Офис Менеджер <br> <strong> Амирханова Дария </strong> <br> <br> Подпись_____________</div>
             </div>
         </div>
+
+        <script>
+            let increaser = 0
+        </script>
+        {% for num in nums %}
+        
+            <script>
+                counter();
+                function counter(){
+                    increaser++;
+                    console.log(increaser);
+                }
+            </script>
+        {% endfor %}
     {% endif %}
+
 {% endblock %}
