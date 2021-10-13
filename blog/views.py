@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
 
 # from django.http import HttpResponse
 # from django.views.generic import View
@@ -20,6 +21,9 @@ from .forms import *
 
 def dogovor_new(request):
     return render(request, 'blog/dogovor_new.html', {})
+
+
+
 
 def company_list(request):
     dogovors = Dogovor.objects.order_by('id')
@@ -422,3 +426,57 @@ def some_view(request, pk, status):
     }
 
     return render(request, 'blog/mail_pdf.html', context)
+
+
+
+
+
+def entity_edit(request, pk):
+
+    entity = Entity.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = EntityEdit(request.POST, request.FILES, instance = entity)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('mail_list')
+    else:
+        form = EntityEdit()
+    try:
+        responses = OutMail.objects.filter(response_to_id = pk)
+    except:
+        responses = None
+
+
+    context = {
+        'entity': entity,
+        'responses': responses,
+        'form': form,
+    }
+
+    return render(request, 'blog/entity_edit.html', context)
+
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('mail_list')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return redirect('user_login')
+    else:
+        form = LoginForm()
+    return render(request, 'blog/login.html', {'form': form})
+
+

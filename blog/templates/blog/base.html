@@ -25,4 +25,9 @@
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/code.js' %}"></script>
     </html>
+{% else %}
+    Please Login
+    
+    <a href="{% url 'user_login' %}"><div>Sign in</div></a>
+
 {% endif %}

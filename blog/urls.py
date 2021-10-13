@@ -21,4 +21,6 @@ urlpatterns = [
     path('mail_new/<str:status>', views.mail_new, name='mail_new'),
     path('sub_detail/<int:pk>', views.sub_detail, name='sub_detail'),
     path('some_view/<int:pk>/<str:status>', views.some_view, name='some_view'),
+    path('entity_edit/<int:pk>', views.entity_edit, name='entity_edit'),
+    path('user_login', views.user_login, name='user_login'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

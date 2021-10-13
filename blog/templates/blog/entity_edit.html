@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+    {%if entity %}
+        Название: {{ entity.name }}, {{ entity.get_etype_display }} <br>
+        БИН: {{ entity.ebin }}
+        {{ entity.ebin2 }} <br>
+        {% if entity.adress %}
+            Текущий адрес: {{ entity.adress }}
+        {% endif %}
+         <br>
+    {% endif %}
+    <div class="entity_edit">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form><hr>
+    </div>
+{% endblock %}

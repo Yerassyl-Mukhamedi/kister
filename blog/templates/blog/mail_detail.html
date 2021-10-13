@@ -33,6 +33,7 @@
             Инициатор: {{ mail.init }} {{ mail.init.email }} {{ mail.init.phone }} <br>
             Дата: {{ mail.created_at }} <br>
             Кому: {{ mail.side_two }} <br>
+            <a href="{% url 'entity_edit' pk=mail.side_two.id %}">Редактировать контрагента</a> <br>
             От кого: {{ mail.own_company }} <br>
             <div id="topic">
                 Тема: {{ mail.topic }} <br>
