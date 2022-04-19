@@ -20,7 +20,7 @@ class OwnCompany(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.name + str(self.id)
 
 
 class Entity(models.Model):
@@ -32,8 +32,12 @@ class Entity(models.Model):
     ebin2 = models.CharField('Иностранный Номер', max_length=200, blank=True)
 
 
+    class Meta:
+        ordering = ['name']
+        
     def __str__(self):
-        return self.name +', ' + self.get_etype_display()+ " ---     " + str(self.id)
+        return self.name +', ' + self.get_etype_display()
+
 
 
 def file_path(instance, filename):

@@ -130,6 +130,10 @@
   display: none;
 }
 
+
+.had{
+  display: none;
+}
 .mail_edit form p:nth-child(2) {
   display: none;
 }

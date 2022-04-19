@@ -1,64 +1,68 @@
 {% extends 'blog/base.html' %}
 {% block content %}
     <div class="mail_list">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="title">Список писем</div>
+        {% if user.get_username != "Aktau" %}
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="title">Список писем</div>
+                </div>
+                <div class="col-md-2">
+                    <form action="{% url 'mail_search' %}" method="get">
+                        <input class="input" type="text" name="own" id="own" placeholder="Наши компаний">
+                        <input class="input" type="text" name="other" id="other" placeholder="Контрагенты">
+                        <button type="submit">Поиск</button>
+                    </form>
+                </div>
             </div>
-            <div class="col-md-2">
-                <form action="{% url 'mail_search' %}" method="get">
-                    <input class="input" type="text" name="own" id="own" placeholder="Наши компаний">
-                    <input class="input" type="text" name="other" id="other" placeholder="Контрагенты">
-                    <button type="submit">Поиск</button>
-                </form>
-            </div>
-        </div>
+        {% endif %}
 
         <div class="row">
-            <div class="col-md-6 left">
-                <div class="row top">
-                    <div class="col-md-3">
-                        <div class="sub_title">Входящие</div>
-                    </div>
-                    <div class="col-md-9">
-                        <a href="{% url 'mail_new' status='in' %}"><img class="plus" src="/media/images/plus.png"></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="sub_label col-md-1">
-                        #
-                    </div>
-                    <div class="sub_label col-md-3">
-                        Кому
-                    </div>
-                    <div class="sub_label col-md-4">
-                        От кого
-                    </div>
-                    <div class="sub_label col-md-4">
-                        Дата создания
-                    </div>
-                </div>
-                {% for mail in inmails %}
-                <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
-                    <div class="row">
-                        <div class="col-md-1">
-                            {{ mail.in_number }}
-                        </div>
+            
+            {% if user.get_username != "Aktau" and  user.get_username != "Chim"  %}
+                <div class="col-md-6 left">
+                    <div class="row top">
                         <div class="col-md-3">
-                            {{ mail.own_company }}
+                            <div class="sub_title">Входящие</div>
                         </div>
-                        <div class="col-md-4">
-                            {{ mail.side_two }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ mail.created_at }}
+
+                        <div class="col-md-9">
+                            <a href="{% url 'mail_new' status='in' %}"><img class="plus" src="/media/images/plus.png"></a>
                         </div>
                     </div>
-                </a>
-                {% endfor %}
-
-
-            </div>
+                    <div class="row">
+                        <div class="sub_label col-md-1">
+                            #
+                        </div>
+                        <div class="sub_label col-md-3">
+                            Кому
+                        </div>
+                        <div class="sub_label col-md-4">
+                            От кого
+                        </div>
+                        <div class="sub_label col-md-4">
+                            Дата создания
+                        </div>
+                    </div>
+                    {% for mail in inmails %}
+                        <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    {{ mail.in_number }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ mail.own_company }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.side_two }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.created_at }}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="col-md-6">
                 <div class="row top">
                     <div class="col-md-3">
@@ -82,25 +86,67 @@
                         Дата создания
                     </div>
                 </div>
-                {% for mail in outmails %}
-
-                <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
-                    <div class="row">
-                        <div class="col-md-1">
-                            {{ mail.out_number }}
+                {% if user.get_username != "Aktau" and user.get_username != "Chim"%}
+                    {% for mail in outmails %}
+                    <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                        <div class="row">
+                            <div class="col-md-1">
+                                {{ mail.out_number }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ mail.own_company }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ mail.side_two }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ mail.created_at }}
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            {{ mail.own_company }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ mail.side_two }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ mail.created_at }}
-                        </div>
-                    </div>
-                </a>
-                {% endfor %}
+                    </a>
+                    {% endfor %}
+                {% endif %}
+                {% if user.get_username == "Aktau" %}
+                    {% for mail in outmailsAktau %}
+                        <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    {{ mail.out_number }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ mail.own_company }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.side_two }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.created_at }}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+                
+                {% if user.get_username == "Chim" %}
+                    {% for mail in outmailsChim %}
+                        <a href="{% url 'mail_detail' status=mail.status pk=mail.id %}">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    {{ mail.out_number }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ mail.own_company }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.side_two }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ mail.created_at }}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

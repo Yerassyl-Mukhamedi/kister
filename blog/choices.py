@@ -18,6 +18,10 @@ own_companies = (
     ('5', 'Двери Класс'),
     ('6', 'Beltaus'),
     ('7', 'Kendala Logistics'),
+    ('8', 'Delta Doors'),
+    ('9', 'Senim Doors'),
+    ('10', 'Двери Опт Актау'),
+    ('11', 'Двери Опт Шымкент'),
 )
 
 signer_choice = (

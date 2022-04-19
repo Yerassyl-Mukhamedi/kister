@@ -220,11 +220,15 @@ def expired_list(request):
 
 
 def mail_list(request):
-    inmails = InMail.objects.all().order_by('-id')
-    outmails = OutMail.objects.all().order_by('-id')
+    inmails = InMail.objects.all().order_by('-id')[:100]
+    outmails = OutMail.objects.all().order_by('-id')[:100]
+    outmailsAktau = OutMail.objects.filter(own_company = 15).order_by('-id')
+    outmailsChim = OutMail.objects.filter(own_company = 16).order_by('-id')
     context = {
         'inmails': inmails,
         'outmails': outmails,
+        'outmailsAktau': outmailsAktau,
+        'outmailsChim': outmailsChim,
     }
     return render(request, 'blog/mail_list.html', context)
 
@@ -343,6 +347,10 @@ def mail_new(request, status):
         own7 = InMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
         own8 = InMail.objects.filter(own_company__name = 'Kendala KG').last()
         own9 = InMail.objects.filter(own_company__name = 'Kendala Logistics').last()
+        own10 = InMail.objects.filter(own_company__name = 'Delta Doors').last()
+        own11 = InMail.objects.filter(own_company__name = 'Senim Doors').last()
+        own12 = InMail.objects.filter(own_company__name = 'Двери Опт Актау').last()
+        own13 = InMail.objects.filter(own_company__name = 'Двери Опт Шымкент').last()
         if request.method == "POST":
             form = InMailForm(request.POST, request.FILES)
             if form.is_valid():
@@ -365,6 +373,10 @@ def mail_new(request, status):
         own7 = OutMail.objects.filter(own_company__name = 'ТОО Beltaus').last()
         own8 = OutMail.objects.filter(own_company__name = 'Kendala KG').last()
         own9 = OutMail.objects.filter(own_company__name = 'Kendala Logistics').last()
+        own10 = OutMail.objects.filter(own_company__name = 'Delta Doors').last()
+        own11 = OutMail.objects.filter(own_company__name = 'Senim Doors').last()
+        own12 = OutMail.objects.filter(own_company__name = 'Двери Опт Актау').last()
+        own13 = OutMail.objects.filter(own_company__name = 'Двери Опт Шымкент').last()
         if request.method == "POST":
             form = OutMailForm(request.POST, request.FILES)
             if form.is_valid():
@@ -387,6 +399,10 @@ def mail_new(request, status):
         'own7': own7,
         'own8': own8,
         'own9': own9,
+        'own10': own10,
+        'own11': own11,
+        'own12': own12,
+        'own13': own13,
     }
 
 

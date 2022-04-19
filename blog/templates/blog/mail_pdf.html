@@ -17,6 +17,16 @@
                     ИП Таишев
                 {% elif mail.own_company.name == 'Kendala IMPEX' %}
                     Kendala IMPEX
+                {% elif mail.own_company.name == 'Kendala Logistics' %}
+                    Kendala Logistics
+                {% elif mail.own_company.name == 'Delta Doors' %}
+                    Delta Doors
+                {% elif mail.own_company.name == 'Senim Doors' %}
+                    Senim Doors
+                {% elif mail.own_company.name == 'Двери Опт Актау' %}
+                    Двери Опт Актау
+                {% elif mail.own_company.name == 'Двери Опт Шымкент' %}
+                    Двери Опт Шымкент
                 {% endif %}
             </div>
             
@@ -38,7 +48,7 @@
             <p id="topic">{{ mail.topic }}</p>
             <div class="sign">
                 <div>Место печати</div>
-                <div>Исполнитель <br> Офис Менеджер <br> <strong> Амирханова Дария </strong> <br> <br> Подпись_____________</div>
+                <div>Исполнитель <br> Офис Менеджер <br> <strong> {% if mail.own_company.id == 15 %}Aktau  {% elif mail.own_company.id == 16 %} Shymkent {% else %} Амирханова Дария {% endif %}</strong> <br> <br> Подпись_____________</div>
             </div>
         </div>
 
