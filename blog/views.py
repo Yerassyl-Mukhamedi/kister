@@ -220,8 +220,8 @@ def expired_list(request):
 
 
 def mail_list(request):
-    inmails = InMail.objects.all().order_by('-id')[:100]
-    outmails = OutMail.objects.all().order_by('-id')[:100]
+    inmails = InMail.objects.all().order_by('-id')[:400]
+    outmails = OutMail.objects.all().order_by('-id')[:400]
     outmailsAktau = OutMail.objects.filter(own_company = 15).order_by('-id')
     outmailsChim = OutMail.objects.filter(own_company = 16).order_by('-id')
     context = {
